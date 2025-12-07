@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+:root {
+  --background: #D9D9D9;
+  --foreground: #000000;
+
+  --Orange10: #FEF6E9;
+  --Orange20: #FEE3B8;
+  --Orange30-Hover: #FED187;
+  --Orange40: #FEBE56;
+  --Orange50-Primary: #F9A825;
+  --Orange60: #D78C13;
+  --Orange70: #B57206;
+  --Orange80: #935A00;
+  --Orange90: #714500;
+  --Orange100: #4F3100;
+
+  --Black10: #F2F4F8;
+  --Black20: #DDE1E6;
+  --Black30: #C1C7CD;
+  --Black40: #A2A9B0;
+  --Black50: #878D96;
+  --Black60: #697077;
+  --Black70: #4D5358;
+  --Black80: #343A3F;
+  --Black85-DarkGray: #333333;
+  --Black90: #21272A;
+  --Black100: #121619;
+
+  --MarbleWhite: #F8F8F8;
+  --WhiteGray: #E0E0E0;
+  --Alert: #DA1E28;
+  --Warning: #F1C21B;
+  --Success: #25A249;
+  --Overlay: #121619;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Cores Orange (Você define o nome da classe após --color-) */
+  --color-orange-10: var(--Orange10);
+  --color-orange-20: var(--Orange20);
+  --color-orange-30: var(--Orange30-Hover);
+  --color-orange-40: var(--Orange40);
+  --color-primary: var(--Orange50-Primary); /* Dei o nome de 'primary' para facilitar */
+  --color-orange-50: var(--Orange50-Primary); /* Ou mantenha a numeração */
+  --color-orange-60: var(--Orange60);
+  --color-orange-70: var(--Orange70);
+  --color-orange-80: var(--Orange80);
+  --color-orange-90: var(--Orange90);
+  --color-orange-100: var(--Orange100);
+
+  /* Cores Black/Gray */
+  --color-black-10: var(--Black10);
+  --color-black-20: var(--Black20);
+  --color-black-30: var(--Black30);
+  --color-black-40: var(--Black40);
+  --color-black-50: var(--Black50);
+  --color-black-60: var(--Black60);
+  --color-black-70: var(--Black70);
+  --color-black-80: var(--Black80);
+  --color-darkgray: var(--Black85-DarkGray);
+  --color-black-90: var(--Black90);
+  --color-black-100: var(--Black100);
+
+  /* Cores de Status e Neutras */
+  --color-marble: var(--MarbleWhite);
+  --color-white-gray: var(--WhiteGray);
+  --color-alert: var(--Alert);
+  --color-warning: var(--Warning);
+  --color-success: var(--Success);
+  --color-overlay: var(--Overlay);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #D9D9D9;
+    --foreground: #000000;
+  }
+}
+
+body {
+  padding: 0 80px;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
