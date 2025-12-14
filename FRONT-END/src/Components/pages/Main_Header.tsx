@@ -6,7 +6,7 @@ export default function Header() {
         <>
         <header className="w-full h-[71px] bg-slate-50 border-b border-gray-200 flex items-center justify-center px-4 md:px-8">
       
-            <div className="w-full max-w-[1440px] flex items-center justify-between px-[40px]">
+            <div className="w-full max-w-[1440px] flex items-center justify-between px-10">
             
                 <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center shadow-sm">

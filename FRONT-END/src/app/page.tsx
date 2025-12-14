@@ -1,4 +1,5 @@
 
+import FeaturesBar from "@/Components/Home/FeaturesBar";
 import Slider from "@/Components/Home/Slider";
 
 
@@ -12,6 +13,7 @@ export default function Home(){
   return(
     <main className="w-full">
       <Slider images={minhasFotos}/>
+      <FeaturesBar/>
     </main>
   );
 }

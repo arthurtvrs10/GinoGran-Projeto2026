@@ -1,5 +1,6 @@
 "use client"; // Obrigatório para usar useState
 import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
   
 interface sliderProps{
   images: string[];
@@ -16,7 +17,7 @@ export default function Slider({images}: sliderProps){
       <button 
         onClick={prevSlide}
         className="absolute top-1/2 left-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-colors">
-        ⬅️
+        <ChevronLeft/>
       </button>
       {images[current] && (
         // eslint-disable-next-line @next/next/no-img-element
@@ -29,7 +30,7 @@ export default function Slider({images}: sliderProps){
       <button 
         onClick={nextSlide}
         className="absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-colors">
-        ➡️
+        <ChevronRight/>
       </button>
     </div>
   );
