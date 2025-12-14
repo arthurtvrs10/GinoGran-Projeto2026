@@ -24,8 +24,6 @@ export function EmployeeCard({ name, role, imageSrc }: EmployeeCardProps) {
 
       <h4 className="text-xl font-bold text-gray-800 mb-1">{name}</h4>
       
-      {/* O TEXTO DA FUNÇÃO */}
-      {/* Usamos 'group-hover:' em vez de apenas 'hover:' */}
       <p className="text-gray-500 text-sm transition-colors duration-300 group-hover:text-[#F9A825] group-hover:font-medium">
         {role}
       </p>

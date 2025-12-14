@@ -1,3 +1,4 @@
+
 import Cta from '@/Components/SobreNos/CTA';
 import HeroSection from '@/Components/SobreNos/HeroSection';
 import History from '@/Components/SobreNos/History';
@@ -13,6 +14,7 @@ export default function SobreNos() {
 
     {/* --- A HISTÓRIA (Foco no Texto) ---       */}
     <History/>
+
 
 
     {/* --- VALORES / DIFERENCIAIS ---  Quebra o ritmo de leitura com ícones e texto curto. */}
