@@ -1,4 +1,4 @@
-import BlogSection from "@/Components/Blog/BlogSection";
+import BlogSection from "@/Components/Home/BlogSection";
 import FeaturesBar from "@/Components/Home/FeaturesBar";
 import Slider from "@/Components/Home/Slider";
 

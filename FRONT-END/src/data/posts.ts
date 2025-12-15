@@ -52,4 +52,17 @@ export const posts: BlogPost[] = [
     image: "/Marmore1.jpeg",
     category: "Decoração",
   },
+  {
+    id: 4,
+    slug: "tendencias-2024",
+    title: "Tendências de decoração com pedras naturais",
+    excerpt:
+      "Veja o que está em alta na arquitetura de luxo e como aplicar pedras exóticas no seu projeto.",
+    content:
+      "Para 2024, a tendência são as pedras exóticas com veios marcantes e cores vibrantes. O quartzito, por exemplo, ganha destaque por unir a beleza do mármore com a resistência do granito. Bancadas com acabamento escovado (fosco) também estão super em alta.",
+    date: "05 Dez 2023",
+    author: "Beatriz Lima",
+    image: "/Marmore1.jpeg",
+    category: "Decoração",
+  },
 ];

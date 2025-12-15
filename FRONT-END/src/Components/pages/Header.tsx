@@ -1,15 +1,10 @@
 "use client";
 import Link from "next/link";
-import { Instagram, Facebook, Youtube, Pin } from 'lucide-react';
 import {
   FaInstagram,
   FaFacebookF,
   FaPinterest,
   FaYoutube,
-  FaBars,       
-  FaXmark,     
-  FaTicketSimple,
-  FaUser, 
 } from "react-icons/fa6";
 
 export default function Header() {
@@ -20,18 +15,16 @@ export default function Header() {
         <div className="max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-6">
           <nav>
             <ul className="flex items-center space-x-6">
-              <li><Link href="/sobre" className="uppercase tracking-wider hover:text-black transition-colors">Sobre</Link></li>
-              <li><Link href="/responsabilidade" className="uppercase tracking-wider hover:text-black transition-colors">Blog</Link></li>
-              <li><Link href="/contato" className="uppercase tracking-wider hover:text-black transition-colors">Contato</Link></li>
-              <li><Link href="/imprensa" className="uppercase tracking-wider hover:text-black transition-colors">Imprensa</Link></li>
+              <li><Link href="#" className="uppercase tracking-wider hover:text-black transition-colors">Sobre</Link></li>
+              <li><Link href="#" className="uppercase tracking-wider hover:text-black transition-colors">Blog</Link></li>
+              <li><Link href="#" className="uppercase tracking-wider hover:text-black transition-colors">Contato</Link></li>
+              <li><Link href="#" className="uppercase tracking-wider hover:text-black transition-colors">Imprensa</Link></li>
             </ul>
           </nav>
           
-          {/* ÍCONES SOCIAIS CORRIGIDOS */}
           <div className="flex items-center gap-4">
             
             <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-[#E1306C] transition-colors">
-               {/* Defina um tamanho para o ícone, ex: w-4 h-4 */}
                <FaInstagram className="w-4 h-4" /> 
             </Link>
 
@@ -40,7 +33,6 @@ export default function Header() {
             </Link>
 
             <Link href="https://pinterest.com" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" className="hover:text-[#BD081C] transition-colors">
-               {/* O Lucide pode não ter 'Pinterest' direto, geralmente usa-se 'Pin' ou importa de outra lib, mas se tiver na sua versão: */}
                <FaPinterest className="w-4 h-4" /> 
             </Link>
 
@@ -51,7 +43,8 @@ export default function Header() {
           </div>
         </div>
       </header>
-      
+
+      {/* 2. HEADER */}
       <header className="w-full h-[71px] bg-slate-50 border-b border-gray-200 flex items-center justify-center px-4 md:px-8">
         <div className="w-full max-w-[1440px] flex items-center justify-between px-10">
           <a href="/ " className="flex items-center gap-3">

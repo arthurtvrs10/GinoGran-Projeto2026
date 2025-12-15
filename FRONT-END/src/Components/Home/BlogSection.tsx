@@ -15,21 +15,17 @@ interface BlogPost {
 
 export default function BlogSection() {
   return (
-    <section className="w-full py-20 bg-gray-50 px-[22px]">
-      <div className="max-w-7xl mx-auto">
+    <section className="w-full py-8 bg-gray-50 px-22">
+      <div className="max-w mx-auto">
         {/* Cabeçalho da Seção */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-black-90 mb-4">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-black-90">
             Dicas de Especialista
           </h2>
-          <p className="text-black-60 max-w-2xl mx-auto">
-            Acompanhe nosso blog e fique por dentro das melhores dicas de
-            decoração, manutenção e tendências do mundo das pedras.
-          </p>
         </div>
 
         {/* Grid de Posts */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {posts.map((post) => (
             <article
               key={post.id}
