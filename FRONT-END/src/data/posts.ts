@@ -41,7 +41,7 @@ export const posts: BlogPost[] = [
   },
   {
     id: 3,
-    slug: "tendencias-2024",
+    slug: "tendencdsaas-2024",
     title: "Tendências de decoração com pedras naturais",
     excerpt:
       "Veja o que está em alta na arquitetura de luxo e como aplicar pedras exóticas no seu projeto.",
@@ -54,7 +54,7 @@ export const posts: BlogPost[] = [
   },
   {
     id: 4,
-    slug: "tendencias-2024",
+    slug: "tendenc232-2024",
     title: "Tendências de decoração com pedras naturais",
     excerpt:
       "Veja o que está em alta na arquitetura de luxo e como aplicar pedras exóticas no seu projeto.",

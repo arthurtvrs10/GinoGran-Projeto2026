@@ -2,24 +2,15 @@ import Image from "next/image";
 import { Calendar, User, ArrowRight } from "lucide-react";
 import { posts } from "@/data/posts";
 // 1. Definimos o "formato" do nosso post
-interface BlogPost {
-  id: number;
-  slug: string;
-  title: string;
-  excerpt: string; // Um resumo curto
-  date: string;
-  author: string;
-  image: string;
-  category: string;
-}
+
 
 export default function BlogSection() {
   return (
-    <section className="w-full py-8 bg-gray-50 px-22">
+    <section className="w-full py-8 bg-white px-22">
       <div className="max-w mx-auto">
         {/* Cabeçalho da Seção */}
-        <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-black-90">
+        <div className="text-center mb-8  border-t border-gray-100">
+          <h2 className="text-3xl md:text-4xl font-bold text-black-90 mt-4">
             Dicas de Especialista
           </h2>
         </div>

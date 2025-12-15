@@ -75,7 +75,7 @@ export default function Home() {
 
   return (
     <div>
-      <main className="min-h-screen bg-gray-50 flex flex-col md:flex-row gap-8 px-4 md:px-10 py-8">
+      <main className="min-h-screen bg-gray-50 flex flex-col md:flex-row gap-8 px-4 md:px-22 py-8">
         {/* SIDEBAR (Esquerda) */}
         <div className="w-full md:w-64 shrink-0">
           <SidebarFilter
