@@ -14,26 +14,25 @@ interface BlogPost {
 }
 
 export default function BlogSection() {
-
   return (
     <section className="w-full py-20 bg-gray-50 px-[22px]">
       <div className="max-w-7xl mx-auto">
-        
         {/* Cabeçalho da Seção */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-black-90 mb-4">
             Dicas de Especialista
           </h2>
           <p className="text-black-60 max-w-2xl mx-auto">
-            Acompanhe nosso blog e fique por dentro das melhores dicas de decoração, manutenção e tendências do mundo das pedras.
+            Acompanhe nosso blog e fique por dentro das melhores dicas de
+            decoração, manutenção e tendências do mundo das pedras.
           </p>
         </div>
 
         {/* Grid de Posts */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post) => (
-            <article 
-              key={post.id} 
+            <article
+              key={post.id}
               className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-1 border border-black-10"
             >
               {/* Imagem do Card */}
@@ -42,10 +41,10 @@ export default function BlogSection() {
                   {post.category}
                 </div>
                 <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill 
-                    className="w-full h-full object-cover ..."
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="w-full h-full object-cover ..."
                 />
               </div>
 
@@ -72,8 +71,8 @@ export default function BlogSection() {
                 </p>
 
                 {/* Link de Ler Mais */}
-                <a 
-                  href={`/blog/${post.slug}`} 
+                <a
+                  href={`/blog/${post.slug}`}
                   className="inline-flex items-center gap-2 text-(--Orange50-Primary) font-bold text-sm hover:gap-3 transition-all"
                 >
                   Ler artigo completo <ArrowRight size={16} />
@@ -82,7 +81,6 @@ export default function BlogSection() {
             </article>
           ))}
         </div>
-
       </div>
     </section>
   );

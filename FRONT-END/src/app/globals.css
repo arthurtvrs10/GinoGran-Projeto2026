@@ -1,37 +1,37 @@
 @import "tailwindcss";
 
 :root {
-  --background: #D9D9D9;
+  --background: #d9d9d9;
   --foreground: #000000;
 
-  --Orange10: #FEF6E9;
-  --Orange20: #FEE3B8;
-  --Orange30-Hover: #FED187;
-  --Orange40: #FEBE56;
-  --Orange50-Primary: #F9A825;
-  --Orange60: #D78C13;
-  --Orange70: #B57206;
-  --Orange80: #935A00;
+  --Orange10: #fef6e9;
+  --Orange20: #fee3b8;
+  --Orange30-Hover: #fed187;
+  --Orange40: #febe56;
+  --Orange50-Primary: #f9a825;
+  --Orange60: #d78c13;
+  --Orange70: #b57206;
+  --Orange80: #935a00;
   --Orange90: #714500;
-  --Orange100: #4F3100;
+  --Orange100: #4f3100;
 
-  --Black10: #F2F4F8;
-  --Black20: #DDE1E6;
-  --Black30: #C1C7CD;
-  --Black40: #A2A9B0;
-  --Black50: #878D96;
+  --Black10: #f2f4f8;
+  --Black20: #dde1e6;
+  --Black30: #c1c7cd;
+  --Black40: #a2a9b0;
+  --Black50: #878d96;
   --Black60: #697077;
-  --Black70: #4D5358;
-  --Black80: #343A3F;
+  --Black70: #4d5358;
+  --Black80: #343a3f;
   --Black85-DarkGray: #333333;
-  --Black90: #21272A;
+  --Black90: #21272a;
   --Black100: #121619;
 
-  --MarbleWhite: #F8F8F8;
-  --WhiteGray: #E0E0E0;
-  --Alert: #DA1E28;
-  --Warning: #F1C21B;
-  --Success: #25A249;
+  --MarbleWhite: #f8f8f8;
+  --WhiteGray: #e0e0e0;
+  --Alert: #da1e28;
+  --Warning: #f1c21b;
+  --Success: #25a249;
   --Overlay: #121619;
 }
 
@@ -46,7 +46,9 @@
   --color-orange-20: var(--Orange20);
   --color-orange-30: var(--Orange30-Hover);
   --color-orange-40: var(--Orange40);
-  --color-primary: var(--Orange50-Primary); /* Dei o nome de 'primary' para facilitar */
+  --color-primary: var(
+    --Orange50-Primary
+  ); /* Dei o nome de 'primary' para facilitar */
   --color-orange-50: var(--Orange50-Primary); /* Ou mantenha a numeração */
   --color-orange-60: var(--Orange60);
   --color-orange-70: var(--Orange70);

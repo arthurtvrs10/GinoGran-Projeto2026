@@ -1,36 +1,34 @@
 // src/components/team/TeamSection.tsx (ou direto na sua page.tsx)
-import { EmployeeCard } from './EmployeeCard';
-
+import { EmployeeCard } from "./EmployeeCard";
 
 // Dados da Equipe
 const team = [
   {
     name: "Mariana Souza",
     role: "Arquiteta Consultora",
-    imageSrc: "/Marmore1.jpeg"
+    imageSrc: "/Marmore1.jpeg",
   },
   {
     name: "Carlos Mendes",
     role: "Mestre de Acabamento",
-    imageSrc: "/Marmore1.jpeg"
+    imageSrc: "/Marmore1.jpeg",
   },
   {
     name: "Fernanda Lima",
     role: "Gerente Comercial",
-    imageSrc: "/Marmore1.jpeg"
+    imageSrc: "/Marmore1.jpeg",
   },
   {
     name: "João Paulo",
     role: "Líder de Instalação",
-    imageSrc: "/Marmore1.jpeg"
-  }
+    imageSrc: "/Marmore1.jpeg",
+  },
 ];
 
 export function TeamSection() {
   return (
     <section className="py-24 bg-white border-t border-gray-100">
       <div className="w-full max-w-7xl mx-auto px-[22px]">
-        
         {/* Cabeçalho */}
         <div className="text-center mb-16">
           <span className="text-[#F9A825] font-semibold tracking-wider uppercase text-sm">
@@ -47,7 +45,7 @@ export function TeamSection() {
         {/* Grid da Equipe */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {team.map((member, index) => (
-            <EmployeeCard 
+            <EmployeeCard
               key={index}
               name={member.name}
               role={member.role}
@@ -55,7 +53,6 @@ export function TeamSection() {
             />
           ))}
         </div>
-
       </div>
     </section>
   );

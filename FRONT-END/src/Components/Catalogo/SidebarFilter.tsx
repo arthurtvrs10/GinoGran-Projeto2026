@@ -7,34 +7,34 @@ interface FilterProps {
   setPriceRange: (range: { min: string; max: string }) => void;
   onClear: () => void; // Nova prop para o botão de limpar
 
-  selectedFinish: string;           
+  selectedFinish: string;
   setFinish: (value: string) => void;
   selectedColor: string;
   setColor: (value: string) => void;
 }
 
-export function SidebarFilter({ 
-  selectedMaterials, 
-  setMaterial, 
-  selectedFinish, 
-  setFinish,      
-  selectedColor,  
+export function SidebarFilter({
+  selectedMaterials,
+  setMaterial,
+  selectedFinish,
+  setFinish,
+  selectedColor,
   setColor,
-  priceRange, 
+  priceRange,
   setPriceRange,
   onClear,
 }: FilterProps) {
-  
   // Lista de materiais disponíveis
   const materials = ["Mármore", "Granito", "Quartzo", "Travertino", "Onyx"]; // Atualizei para bater com o mock
 
   return (
     <aside className="w-full md:w-64 flex flex-col gap-8 p-4 md:pr-6 border-r border-stone-100 bg-white">
-      
       {/* Cabeçalho do Filtro */}
       <div className="flex items-center justify-between pb-4 border-b border-stone-100">
-        <h2 className="font-serif text-lg text-stone-800 font-semibold">Filtros</h2>
-        <button 
+        <h2 className="font-serif text-lg text-stone-800 font-semibold">
+          Filtros
+        </h2>
+        <button
           onClick={onClear}
           className="text-xs text-stone-500 hover:text-stone-800 underline"
         >
@@ -49,9 +49,12 @@ export function SidebarFilter({
         </h3>
         <div className="flex flex-col gap-2">
           {materials.map((item) => (
-            <label key={item} className="flex items-center gap-2 cursor-pointer group">
-              <input 
-                type="checkbox" 
+            <label
+              key={item}
+              className="flex items-center gap-2 cursor-pointer group"
+            >
+              <input
+                type="checkbox"
                 className="w-4 h-4 rounded border-stone-300 text-stone-800 focus:ring-stone-500"
                 // Lógica conectada:
                 checked={selectedMaterials.includes(item)}
@@ -70,15 +73,15 @@ export function SidebarFilter({
         <h3 className="text-sm font-bold text-stone-700 uppercase tracking-wide">
           Acabamento
         </h3>
-        <select 
+        <select
           value={selectedFinish} // Controlado pelo estado
           onChange={(e) => setFinish(e.target.value)}
           className="w-full p-2 text-sm border border-stone-200 rounded bg-white text-stone-600 focus:outline-none focus:border-stone-500"
         >
-            <option value="">Qualquer</option>
-            <option value="polido">Polido (Brilhante)</option>
-            <option value="levigado">Levigado (Fosco)</option>
-            <option value="escovado">Escovado (Rústico)</option>
+          <option value="">Qualquer</option>
+          <option value="polido">Polido (Brilhante)</option>
+          <option value="levigado">Levigado (Fosco)</option>
+          <option value="escovado">Escovado (Rústico)</option>
         </select>
       </div>
 
@@ -105,7 +108,7 @@ export function SidebarFilter({
                 className={`
                     w-8 h-8 rounded-full border shadow-sm transition-all 
                     ${c.color}
-                    ${isSelected ? 'ring-2 ring-offset-2 ring-stone-400 scale-110' : 'hover:scale-110'}
+                    ${isSelected ? "ring-2 ring-offset-2 ring-stone-400 scale-110" : "hover:scale-110"}
                 `}
                 title={c.name}
                 aria-label={`Filtrar por ${c.name}`}
@@ -122,31 +125,38 @@ export function SidebarFilter({
         </h3>
         <div className="flex items-center gap-2">
           <div className="relative w-full">
-            <span className="absolute left-2 top-2 text-stone-400 text-xs">R$</span>
+            <span className="absolute left-2 top-2 text-stone-400 text-xs">
+              R$
+            </span>
             <input
               type="number"
               placeholder="Min"
               className="w-full pl-6 pr-2 py-1 text-sm border border-stone-200 rounded focus:border-stone-500 focus:outline-none"
               // Lógica conectada:
               value={priceRange.min}
-              onChange={(e) => setPriceRange({ ...priceRange, min: e.target.value })}
+              onChange={(e) =>
+                setPriceRange({ ...priceRange, min: e.target.value })
+              }
             />
           </div>
           <span className="text-stone-400">-</span>
           <div className="relative w-full">
-            <span className="absolute left-2 top-2 text-stone-400 text-xs">R$</span>
+            <span className="absolute left-2 top-2 text-stone-400 text-xs">
+              R$
+            </span>
             <input
               type="number"
               placeholder="Max"
               className="w-full pl-6 pr-2 py-1 text-sm border border-stone-200 rounded focus:border-stone-500 focus:outline-none"
               // Lógica conectada:
               value={priceRange.max}
-              onChange={(e) => setPriceRange({ ...priceRange, max: e.target.value })}
+              onChange={(e) =>
+                setPriceRange({ ...priceRange, max: e.target.value })
+              }
             />
           </div>
         </div>
       </div>
-
     </aside>
   );
 }

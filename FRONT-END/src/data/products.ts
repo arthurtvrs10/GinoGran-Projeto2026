@@ -1,4 +1,5 @@
-{/**  Preciso criar uma API para isso, mas para teste pode ser por aqui localmente
+{
+  /**  Preciso criar uma API para isso, mas para teste pode ser por aqui localmente
 export const products = [
   {
     id: 1,
@@ -11,28 +12,28 @@ export const products = [
     finish: "Polido"
   },
   
-];**/}
-
+];**/
+}
 
 const materials = ["Mármore", "Granito", "Quartzo", "Travertino", "Onyx"];
 const colors = ["Branco", "Preto", "Cinza", "Bege", "Verde", "Rosa", "Marrom"];
 const qualities = ["Premium", "Extra", "Importado", "Nacional", "Super"];
 const finishes = ["Polido", "Levigado", "Escovado"];
 
-const getRandom = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)];
+const getRandom = (arr: string[]) =>
+  arr[Math.floor(Math.random() * arr.length)];
 
 // Função para formatar preço em BRL
 const formatPrice = (value: number) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
   }).format(value);
 };
 
 // 2. Gerador do Array de Produtos
 // Mude o 'length: 20' para a quantidade que quiser (ex: 50, 100)
 export const products = Array.from({ length: 10 }).map((_, index) => {
-
   const randomPrice = Math.floor(Math.random() * (2000 - 400 + 1) + 400);
 
   const material = getRandom(materials);
@@ -47,7 +48,7 @@ export const products = Array.from({ length: 10 }).map((_, index) => {
     id: index + 1,
     title: title,
     image: `/marmore${imageNum}.jpeg`,
-    price : formatPrice(randomPrice),
+    price: formatPrice(randomPrice),
     category: material,
     color: color,
     finish: finish,
