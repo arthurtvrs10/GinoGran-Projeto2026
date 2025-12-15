@@ -6,7 +6,9 @@ interface ProductProps {
         title: string;
         image: string;
         price: string;
-        category?: string; // Opcional: ex: "Mármore Branco"
+        category?: string; 
+        finish?: string; 
+        color?: string;  
     };
 }
 
@@ -15,7 +17,7 @@ export function ProductCard({ data }: ProductProps) {
         <div className="group relative flex flex-col bg-white rounded-md border border-stone-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden h-full">
             
             {/* Container da Imagem - Altura reduzida (Aspect Ratio 3/2) */}
-            <div className="relative w-full aspect-[3/2] overflow-hidden bg-stone-100">
+            <div className="relative w-full aspect-3/2 overflow-hidden bg-stone-100">
                 <Image
                     src={data.image}
                     alt={data.title}

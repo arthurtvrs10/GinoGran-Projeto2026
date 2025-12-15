@@ -1,5 +1,5 @@
 
-import Cta from '@/Components/SobreNos/CTA';
+import Cta from '@/Components/pages/CTA';
 import HeroSection from '@/Components/SobreNos/HeroSection';
 import History from '@/Components/SobreNos/History';
 import { TeamSection } from '@/Components/SobreNos/TeamSection';

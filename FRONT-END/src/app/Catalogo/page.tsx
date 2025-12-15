@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ProductCard } from "@/Components/Catalogo/ProductCard";
 import { SidebarFilter } from "@/Components/Catalogo/SidebarFilter";
 import { products } from "@/data/products"; 
+import Cta from "@/Components/pages/CTA";
 
 // Função auxiliar para limpar o preço (ex: "R$ 1.200,00" -> 1200.00)
 const parsePrice = (priceString: string) => {
@@ -20,9 +21,11 @@ const parsePrice = (priceString: string) => {
 export default function Home() {
   // 1. ESTADOS (Onde guardamos as escolhas do usuário)
   const [selectedMaterials, setSelectedMaterials] = useState<string[]>([]);
+  const [selectedFinish, setSelectedFinish] = useState<string>(""); 
+  const [selectedColor, setSelectedColor] = useState<string>("");   
   const [priceRange, setPriceRange] = useState({ min: "", max: "" });
 
-  // 2. LÓGICA DO FILTRO (Checkbox)
+  // 2. LÓGICA DO TOGGLE DE MATERIAIS
   const toggleMaterial = (material: string) => {
     if (selectedMaterials.includes(material)) {
       // Se já tem, remove
@@ -33,9 +36,16 @@ export default function Home() {
     }
   };
 
+  // Lógica para Cor (clicar na mesma cor desmarca)
+  const toggleColor = (color: string) => {
+    setSelectedColor((prev) => (prev === color ? "" : color));
+  };
+
   // 3. LÓGICA DO BOTÃO LIMPAR
   const clearFilters = () => {
     setSelectedMaterials([]);
+    setSelectedFinish("");
+    setSelectedColor("");
     setPriceRange({ min: "", max: "" });
   };
 
@@ -52,7 +62,15 @@ export default function Home() {
     const max = priceRange.max ? parseFloat(priceRange.max) : Infinity;
     const matchesPrice = productPrice >= min && productPrice <= max;
 
-    return matchesMaterial && matchesPrice;
+    // C. Acabamento (Novo)
+    const matchesFinish = 
+      selectedFinish === "" || product.finish === selectedFinish;
+
+    // D. Cor (Novo)
+    const matchesColor = 
+      selectedColor === "" || product.color === selectedColor;
+
+    return matchesMaterial && matchesPrice && matchesFinish && matchesColor;
   });
 
   return (
@@ -63,6 +81,10 @@ export default function Home() {
         <SidebarFilter 
           selectedMaterials={selectedMaterials} // Passa o estado
           setMaterial={toggleMaterial}          // Passa a função de trocar
+          selectedFinish={selectedFinish}
+          setFinish={setSelectedFinish}
+          selectedColor={selectedColor}
+          setColor={toggleColor}
           priceRange={priceRange}               // Passa o preço atual
           setPriceRange={setPriceRange}         // Passa a função de mudar preço
           onClear={clearFilters}                // Passa a função de limpar
@@ -91,13 +113,16 @@ export default function Home() {
             <p className="text-gray-500 mb-4">Nenhum produto encontrado com esses filtros.</p>
             <button 
               onClick={clearFilters}
-              className="text-stone-800 font-semibold underline"
+              className="text-stone-800 font-semibold underline cursor-pointer"
             >
               Limpar filtros
             </button>
           </div>
         )}
       </div>
+
+      {/* CTA no final da página */}
+      <Cta/>
       
     </main>
   );

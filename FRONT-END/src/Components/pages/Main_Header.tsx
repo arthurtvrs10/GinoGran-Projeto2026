@@ -1,5 +1,4 @@
 "use client"
-import { ChevronDown } from 'lucide-react';
 
 export default function Header() {
     return (
@@ -42,7 +41,7 @@ export default function Header() {
                 >
                     
                     <span className="font-medium text-sm">Catálogo</span>
-                    <ChevronDown className="w-4 h-4 text-gray-500 group-hover:text-black transition-colors" />
+                
                 </a>
 
                 <a 
