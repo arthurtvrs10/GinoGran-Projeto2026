@@ -1,4 +1,5 @@
 import BlogSection from "@/Components/Home/BlogSection";
+import {FeaturedCatalog} from "@/Components/Home/FeatureCatalog";
 import FeaturesBar from "@/Components/Home/FeaturesBar";
 import Slider from "@/Components/Home/Slider";
 
@@ -13,7 +14,7 @@ export default function Home() {
     <main className="w-full">
       <Slider images={minhasFotos} />
       <FeaturesBar />
-
+      <FeaturedCatalog />
       {/* --- SEÇÃO DE BLOG --- */}
       <BlogSection />
     </main>

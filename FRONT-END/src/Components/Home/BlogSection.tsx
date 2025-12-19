@@ -1,19 +1,32 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Calendar, User, ArrowRight } from "lucide-react";
 import { posts } from "@/data/posts";
-// 1. Definimos o "formato" do nosso post
-
 
 export default function BlogSection() {
   return (
     <section className="w-full py-8 bg-white px-22">
       <div className="max-w mx-auto">
         {/* Cabeçalho da Seção */}
-        <div className="text-center mb-8  border-t border-gray-100">
-          <h2 className="text-3xl md:text-4xl font-bold text-black-90 mt-4">
-            Dicas de Especialista
-          </h2>
+        <div className="flex justify-between items-end  mb-8  border-t border-gray-100">
+          <div>
+            <span className="text-orange-600 font-bold uppercase tracking-wider text-xs">
+              Nossa Coleção
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-black-90 mt-2">
+              Dicas de especialistas
+            </h2>
+          </div>
+
+          <Link 
+            href="/Blog" 
+            className="group flex items-center gap-2 text-gray-600 font-bold hover:text-orange-600 transition-colors mb-2 md:mb-0"
+          >
+            Ver blog completo
+            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
+        
 
         {/* Grid de Posts */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
