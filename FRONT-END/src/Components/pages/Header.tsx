@@ -12,7 +12,7 @@ export default function Header() {
     <>
       {/* 1. TOP HEADER */}
       <header className="hidden lg:block bg-gray-100 border-b border-gray-200 py-2 text-xs text-gray-600">
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-6">
+        <div className="max-w-full mx-auto flex justify-between items-center px-22 sm:px-22">
           <nav>
             <ul className="flex items-center space-x-6">
               <li><Link href="#" className="uppercase tracking-wider hover:text-black transition-colors">Sobre</Link></li>
@@ -45,8 +45,8 @@ export default function Header() {
       </header>
 
       {/* 2. HEADER */}
-      <header className="w-full h-[71px] bg-slate-50 border-b border-gray-200 flex items-center justify-center px-4 md:px-8">
-        <div className="w-full max-w-[1440px] flex items-center justify-between px-10">
+      <header className="w-full h-[71px] bg-slate-50 border-b border-gray-200 flex items-center justify-center px-22 md:px-22">
+        <div className="w-full max-w-[1440px] flex items-center justify-between ">
           <a href="/ " className="flex items-center gap-3">
             <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center shadow-sm">
               <span className="text-[#F9A825] font-bold text-lg tracking-tighter">
