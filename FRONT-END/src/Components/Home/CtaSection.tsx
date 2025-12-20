@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function CtaSection() {
   return (
-    <div className="relative w-full py-32 flex flex-col items-center justify-center px-6 text-center">
+    <div className="relative w-full h-[400px] py-32 flex flex-col items-center justify-center px-6 text-center">
       <div className="absolute inset-0 w-full h-full">
         <Image
           src= "/Marmore1.jpeg" // <--- TROQUE pelo caminho da sua imagem na pasta public
@@ -18,8 +18,8 @@ export default function CtaSection() {
         <div className="absolute inset-0 bg-black/60" />
       </div>
       <div className="relative z-10 flex flex-col items-center gap-3">
-        <h2 className="text-3xl md:text-4xl font-bold text-white max-w-2xl">
-          Fale Com Nossos Consultores Sobre o seu Projeto com Mármore
+        <h2 className="text-4xl md:text-4xl font-bold text-white max-w-2xl">
+          Fale Com Nossos Consultores
         </h2>
         <p className="text-white max-w-2xl">Transforme seu ambiente com a elegância da pedra natural</p>
         

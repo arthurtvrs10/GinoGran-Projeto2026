@@ -19,9 +19,8 @@ export default function HeroSection() {
         <span className="block text-[#F9A825] font-semibold tracking-widest uppercase mb-4 text-sm md:text-base">
           Desde a rocha bruta até a arte final
         </span>
-        <h1 className="text-4xl md:text-6xl font-light text-white mb-6">
-          A Essência da <strong className="font-bold">Ginogran</strong>
-        </h1>
+        <h1 className="text-4xl md:text-6xl  text-white mb-6 font-bold">
+          A Essência da Ginogran        </h1>
         <p className="text-gray-200 max-w-2xl mx-auto text-lg font-light leading-relaxed">
           Transformamos a força da natureza em sofisticação para o seu ambiente.
         </p>

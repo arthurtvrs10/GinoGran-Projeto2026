@@ -87,7 +87,7 @@ export default function Header() {
             </a>
 
             <a
-              href="#"
+              href="/contato"
               className="text-gray-700 hover:text-black font-medium text-sm transition-colors"
             >
               Contato
