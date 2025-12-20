@@ -4,7 +4,7 @@ export const products = [
   {
     id: 1,
     title: "Mármore Branco Carrara Extra Premium",
-    image: "/marmore1.jpeg", // Certifique-se que esta imagem existe na pasta public
+    image: "/Marmore1.jpeg", // Certifique-se que esta imagem existe na pasta public
     price: "R$ 1.200,00",
     // PROPRIEDADES OBRIGATÓRIAS PARA O FILTRO FUNCIONAR:
     category: "Mármore", 
@@ -33,7 +33,7 @@ const formatPrice = (value: number) => {
 
 // 2. Gerador do Array de Produtos
 // Mude o 'length: 20' para a quantidade que quiser (ex: 50, 100)
-export const products = Array.from({ length: 10 }).map((_, index) => {
+export const products = Array.from({ length: 12 }).map((_, index) => {
   const randomPrice = Math.floor(Math.random() * (2000 - 400 + 1) + 400);
 
   const material = getRandom(materials);
@@ -47,7 +47,7 @@ export const products = Array.from({ length: 10 }).map((_, index) => {
   return {
     id: index + 1,
     title: title,
-    image: `/marmore${imageNum}.jpeg`,
+    image: `/Marmore${imageNum}.jpeg`,
     price: formatPrice(randomPrice),
     category: material,
     color: color,

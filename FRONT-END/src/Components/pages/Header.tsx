@@ -45,8 +45,8 @@ export default function Header() {
       </header>
 
       {/* 2. HEADER */}
-      <header className="w-full h-[71px] bg-slate-50 border-b border-gray-200 flex items-center justify-center px-22 md:px-22">
-        <div className="w-full max-w-[1440px] flex items-center justify-between ">
+      <header className="w-full h-[71px] bg-slate-50 border-b border-gray-200 px-22 py-4">
+        <div className="w-full max-w-full flex items-center justify-between ">
           <a href="/ " className="flex items-center gap-3">
             <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center shadow-sm">
               <span className="text-[#F9A825] font-bold text-lg tracking-tighter">
@@ -80,7 +80,7 @@ export default function Header() {
             </a>
 
             <a
-              href="#"
+              href="/trabalhos"
               className="text-gray-700 hover:text-black font-medium text-sm transition-colors"
             >
               Trabalhos

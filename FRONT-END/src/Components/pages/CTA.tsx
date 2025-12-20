@@ -14,9 +14,11 @@ export default function Cta() {
           Ver Nossos Produtos
         </button>
         {/* Botão Secundário Outline */}
-        <button className="px-8 py-3 bg-transparent text-white border-2 border-black-30 rounded-full font-bold hover:bg-black-20 transition-colors">
+        <a
+          href="https://wa.me/61985921488"
+          className="px-8 py-3 bg-transparent text-white border-2 border-black-30 rounded-full font-bold hover:bg-black-20 transition-colors">
           Fale Conosco
-        </button>
+        </a>
       </div>
     </div>
   );

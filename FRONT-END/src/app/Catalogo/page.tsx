@@ -1,47 +1,49 @@
-"use client"; // Obrigatório para usar useState
+"use client";
 
 import { useState } from "react";
-import { ProductCard } from "@/Components/Catalogo/ProductCard";
+import { ProductCard, ProductType } from "@/Components/Catalogo/ProductCard";
 import { SidebarFilter } from "@/Components/Catalogo/SidebarFilter";
 import { products } from "@/data/products";
 import Cta from "@/Components/pages/CTA";
+import { ProductModal } from "@/Components/ui/ProductModal";
 
-// Função auxiliar para limpar o preço (ex: "R$ 1.200,00" -> 1200.00)
+// 1. Interface local para tipar o Estado (resolve o erro do 'any')
+
 const parsePrice = (priceString: string) => {
   if (!priceString) return 0;
   return parseFloat(
     priceString
-      .replace("R$", "") // Tira o R$
-      .replace(/\./g, "") // Tira os pontos de milhar
-      .replace(",", ".") // Troca vírgula por ponto
+      .replace("R$", "")
+      .replace(/\./g, "")
+      .replace(",", ".")
       .trim(),
   );
 };
 
 export default function Home() {
-  // 1. ESTADOS (Onde guardamos as escolhas do usuário)
+  // --- ESTADOS DE FILTRO ---
   const [selectedMaterials, setSelectedMaterials] = useState<string[]>([]);
   const [selectedFinish, setSelectedFinish] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [priceRange, setPriceRange] = useState({ min: "", max: "" });
 
-  // 2. LÓGICA DO TOGGLE DE MATERIAIS
+  // --- 2. ESTADOS DO MODAL (Agora tipados corretamente) ---
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(null);
+
+  // Lógica de Filtros
   const toggleMaterial = (material: string) => {
     if (selectedMaterials.includes(material)) {
-      // Se já tem, remove
       setSelectedMaterials((prev) => prev.filter((item) => item !== material));
     } else {
-      // Se não tem, adiciona
       setSelectedMaterials((prev) => [...prev, material]);
     }
   };
 
-  // Lógica para Cor (clicar na mesma cor desmarca)
   const toggleColor = (color: string) => {
     setSelectedColor((prev) => (prev === color ? "" : color));
   };
 
-  // 3. LÓGICA DO BOTÃO LIMPAR
   const clearFilters = () => {
     setSelectedMaterials([]);
     setSelectedFinish("");
@@ -49,24 +51,32 @@ export default function Home() {
     setPriceRange({ min: "", max: "" });
   };
 
-  // 4. FILTRAGEM DOS PRODUTOS (O coração da página)
+  // --- 3. LÓGICA DE ABRIR/FECHAR MODAL ---
+  const handleOpenModal = (product: ProductType) => {
+    setSelectedProduct(product); // Salva o produto clicado
+    setIsModalOpen(true);        // Abre o modal
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    // Limpa o produto selecionado após a animação (opcional)
+    setTimeout(() => setSelectedProduct(null), 300); 
+  };
+
+  // Filtragem
   const filteredProducts = products.filter((product) => {
-    // A. Verifica Material (se a lista estiver vazia, aceita todos)
     const matchesMaterial =
       selectedMaterials.length === 0 ||
       (product.category && selectedMaterials.includes(product.category));
 
-    // B. Verifica Preço
     const productPrice = parsePrice(product.price);
     const min = priceRange.min ? parseFloat(priceRange.min) : 0;
     const max = priceRange.max ? parseFloat(priceRange.max) : Infinity;
     const matchesPrice = productPrice >= min && productPrice <= max;
 
-    // C. Acabamento (Novo)
     const matchesFinish =
       selectedFinish === "" || product.finish === selectedFinish;
 
-    // D. Cor (Novo)
     const matchesColor =
       selectedColor === "" || product.color === selectedColor;
 
@@ -76,22 +86,22 @@ export default function Home() {
   return (
     <div>
       <main className="min-h-screen bg-gray-50 flex flex-col md:flex-row gap-8 px-4 md:px-22 py-8">
-        {/* SIDEBAR (Esquerda) */}
+        {/* SIDEBAR */}
         <div className="w-full md:w-64 shrink-0">
           <SidebarFilter
-            selectedMaterials={selectedMaterials} // Passa o estado
-            setMaterial={toggleMaterial} // Passa a função de trocar
+            selectedMaterials={selectedMaterials}
+            setMaterial={toggleMaterial}
             selectedFinish={selectedFinish}
             setFinish={setSelectedFinish}
             selectedColor={selectedColor}
             setColor={toggleColor}
-            priceRange={priceRange} // Passa o preço atual
-            setPriceRange={setPriceRange} // Passa a função de mudar preço
-            onClear={clearFilters} // Passa a função de limpar
+            priceRange={priceRange}
+            setPriceRange={setPriceRange}
+            onClear={clearFilters}
           />
         </div>
 
-        {/* CONTEÚDO (Direita) */}
+        {/* CONTEÚDO */}
         <div className="flex-1">
           <header className="mb-8">
             <h1 className="text-2xl font-bold text-gray-900 font-serif">
@@ -102,15 +112,18 @@ export default function Home() {
             </p>
           </header>
 
-          {/* Verifica se tem produtos para mostrar */}
           {filteredProducts.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredProducts.map((product) => (
-                <ProductCard key={product.id} data={product} />
+                <ProductCard 
+                  key={product.id} 
+                  data={product} 
+                  // 4. PASSA A AÇÃO DE CLIQUE PARA O CARD
+                  onClick={() => handleOpenModal(product)}
+                />
               ))}
             </div>
           ) : (
-            // Mensagem de "Não encontrado"
             <div className="flex flex-col items-center justify-center py-20 bg-white rounded-lg border border-gray-200">
               <p className="text-gray-500 mb-4">
                 Nenhum produto encontrado com esses filtros.
@@ -127,6 +140,13 @@ export default function Home() {
       </main>
 
       <Cta />
+
+      {/* 5. MODAL POSICIONADO FORA DO MAIN */}
+      <ProductModal 
+        isOpen={isModalOpen} 
+        onClose={handleCloseModal} 
+        product={selectedProduct} 
+      />
     </div>
   );
 }

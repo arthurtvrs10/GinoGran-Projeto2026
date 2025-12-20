@@ -33,7 +33,7 @@ export default function BlogSection() {
           {posts.map((post) => (
             <article
               key={post.id}
-              className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-1 border border-black-10"
+              className="bg-white rounded-md overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-1 border border-black-10"
             >
               {/* Imagem do Card */}
               <div className="relative h-48 overflow-hidden">
