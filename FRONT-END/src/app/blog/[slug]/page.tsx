@@ -1,47 +1,89 @@
-import { notFound } from "next/navigation";
-import Image from "next/image";
-import { posts } from "@/data/posts";
-import Link from "next/link";
-import BlogSection from "@/Components/Home/BlogSection";
+"use client";
 
-interface PageProps {
-  params: Promise<{
-    slug: string;
-  }>;
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation"; // Hook para pegar o slug
+import { supabase } from "@/lib/supabase";
+import Image from "next/image";
+import Link from "next/link";
+import BlogSection from "@/Components/Home/BlogSection"; // Mantive seu componente original
+
+interface Post {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  image_url: string;
+  date: string;
+  author?: string;
 }
 
-export default async function BlogPost({ params }: PageProps) {
-  const { slug } = await params;
+export default function BlogPost() {
+  const params = useParams(); // Pega o slug da URL
+  const [post, setPost] = useState<Post | null>(null);
+  const [recentPosts, setRecentPosts] = useState<Post[]>([]); // Para a sidebar
+  const [loading, setLoading] = useState(true);
 
-  const post = posts.find((p) => p.slug === slug);
+  useEffect(() => {
+    async function fetchData() {
+      // 1. Busca o Post Atual
+      const { data: postData, error: postError } = await supabase
+        .from("posts")
+        .select("*")
+        .eq("slug", params.slug)
+        .single();
 
+      if (postData) {
+        setPost(postData);
+        
+        // 2. Busca posts recentes para a Sidebar (excluindo o atual)
+        const { data: recentData } = await supabase
+            .from("posts")
+            .select("*")
+            .neq("id", postData.id) // neq = not equal (diferente do id atual)
+            .limit(3);
+        
+        if (recentData) setRecentPosts(recentData);
+      }
+      setLoading(false);
+    }
+
+    if (params.slug) {
+      fetchData();
+    }
+  }, [params.slug]);
+
+  if (loading) return <div className="text-center py-20">Carregando...</div>;
+  
   if (!post) {
-    notFound();
+    return (
+      <div className="text-center py-40">
+        <h1 className="text-2xl font-bold">Post não encontrado</h1>
+        <Link href="/blog" className="text-orange-500 underline mt-4 block">Voltar para o Blog</Link>
+      </div>
+    );
   }
 
-  // Pega posts recentes (excluindo o atual)
-  const recentPosts = posts.filter((p) => p.slug !== slug).slice(0, 3);
+  // Se o autor não vier do banco, usamos um padrão
+  const authorName = post.author || "Equipe Ginogran";
 
   return (
     <div className="w-full bg-white">
-      {/* --- HERO SECTION (NOVO: Imagem de Fundo + Texto Centralizado) --- */}
-      {/* Esta seção fica fora do container principal para ocupar a largura total */}
+      {/* --- HERO SECTION (SEU DESIGN ORIGINAL MANTIDO) --- */}
       <div className="relative w-full h-[400px] md:h-[400px] flex items-center justify-center overflow-hidden">
         {/* 1. Imagem de Background */}
         <Image
-          src={post.image}
+          src={post.image_url} // Supabase usa image_url
           alt={post.title}
           fill
           className="object-cover z-0"
           priority
         />
-
-        {/* 2. Overlay (Máscara Escura) - Essencial para leitura do texto */}
+        {/* 2. Overlay */}
         <div className="absolute inset-0 bg-black/60 z-10" />
 
         {/* 3. Conteúdo Centralizado */}
         <div className="relative z-20 w-full max-w-4xl mx-auto px-4 text-center flex flex-col items-center gap-6">
-          {/* Chapéu (Categoria e Data) */}
           <div className="flex items-center gap-3">
             <span className="bg-orange-400 text-white px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full">
               Blog Ginogran
@@ -52,7 +94,6 @@ export default async function BlogPost({ params }: PageProps) {
             </span>
           </div>
 
-          {/* Título */}
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight drop-shadow-lg">
             {post.title}
           </h1>
@@ -61,14 +102,14 @@ export default async function BlogPost({ params }: PageProps) {
           <div className="flex items-center gap-3 mt-2">
             <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md overflow-hidden relative border border-white/20 flex items-center justify-center">
               <span className="text-white font-bold text-lg">
-                {post.author.charAt(0)}
+                {authorName.charAt(0)}
               </span>
             </div>
             <div className="text-left">
               <p className="text-[10px] text-gray-300 uppercase font-semibold tracking-wide">
                 Escrito por
               </p>
-              <p className="text-sm font-bold text-white">{post.author}</p>
+              <p className="text-sm font-bold text-white">{authorName}</p>
             </div>
           </div>
         </div>
@@ -76,30 +117,25 @@ export default async function BlogPost({ params }: PageProps) {
 
       {/* --- CONTEÚDO PRINCIPAL --- */}
       <main className="w-full py-12 md:py-16">
-        {/* Container do Grid (Conteúdo + Sidebar) */}
         <div className="max-w-7xl px-4 md:px-8 mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
-          {/* COLUNA ESQUERDA: Texto do Artigo (Ocupa 8 colunas) */}
+          
+          {/* COLUNA ESQUERDA: Texto do Artigo (8 colunas) */}
           <article className="lg:col-span-8">
-            <div
-              className="prose prose-lg md:prose-xl max-w-none text-gray-600 
-              prose-headings:text-gray-900 prose-headings:font-bold 
-              prose-a:text-orange-400 prose-a:no-underline hover:prose-a:underline
-              prose-img:rounded-2xl prose-img:shadow-lg"
-            >
-              {/* Excerpt (Intro) */}
+            <div className="prose prose-lg md:prose-xl max-w-none text-gray-600 prose-headings:text-gray-900 prose-headings:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:underline prose-img:rounded-2xl prose-img:shadow-lg">
+              
               {post.excerpt && (
                 <p className="lead text-xl md:text-2xl text-gray-500 mb-8 font-light italic border-l-4 border-orange-400 pl-4">
                   {post.excerpt}
                 </p>
               )}
 
-              {/* Corpo do Texto */}
-              {/* Se o post.content for HTML puro, use dangerouslySetInnerHTML, senão mantenha o <p> */}
-              <div dangerouslySetInnerHTML={{ __html: post.content }} />
+              {/* Renderização do texto do banco (respeitando quebras de linha) */}
+              <div className="whitespace-pre-line">
+                 {post.content}
+              </div>
 
               <hr className="my-12 border-gray-100" />
 
-              {/* Tags e Compartilhamento */}
               <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                 <div className="flex gap-2">
                   <span className="px-4 py-2 bg-gray-50 rounded-lg text-sm text-gray-600 cursor-pointer hover:bg-gray-100">
@@ -116,10 +152,10 @@ export default async function BlogPost({ params }: PageProps) {
             </div>
           </article>
 
-          {/* COLUNA DIREITA: Sidebar (Ocupa 4 colunas) */}
+          {/* COLUNA DIREITA: Sidebar (4 colunas) - SEU DESIGN ORIGINAL */}
           <aside className="lg:col-span-4">
             <div className="sticky top-10 space-y-12">
-              {/* Widget: Sobre a Empresa */}
+              {/* Widget: Sobre */}
               <div className="bg-gray-50 p-8 rounded-3xl border border-gray-100">
                 <h3 className="text-xl font-bold mb-4 text-gray-900">
                   Sobre a Ginogran
@@ -128,29 +164,22 @@ export default async function BlogPost({ params }: PageProps) {
                   Especialistas em mármores e granitos de alto padrão.
                   Transformamos pedras naturais em obras de arte para o seu lar.
                 </p>
-                <Link
-                  href="/SobreNos"
-                  className="text-orange-400 font-bold hover:underline text-sm"
-                >
+                <Link href="/SobreNos" className="text-orange-400 font-bold hover:underline text-sm">
                   Conheça nossa história →
                 </Link>
               </div>
 
-              {/* Widget: Posts Recentes */}
+              {/* Widget: Posts Recentes (Agora dinâmico do Banco!) */}
               <div>
                 <h3 className="text-xl font-bold mb-6 text-gray-900 border-b border-gray-100 pb-2">
                   Últimas Novidades
                 </h3>
                 <div className="flex flex-col gap-6">
                   {recentPosts.map((item) => (
-                    <Link
-                      key={item.slug}
-                      href={`/blog/${item.slug}`}
-                      className="group flex gap-4 items-start"
-                    >
+                    <Link key={item.slug} href={`/blog/${item.slug}`} className="group flex gap-4 items-start">
                       <div className="relative w-20 h-20 shrink-0 rounded-xl overflow-hidden bg-gray-200">
                         <Image
-                          src={item.image}
+                          src={item.image_url}
                           alt={item.title}
                           fill
                           className="object-cover group-hover:scale-110 transition-transform duration-300"
@@ -172,7 +201,7 @@ export default async function BlogPost({ params }: PageProps) {
               {/* Widget: Banner Promocional */}
               <div className="relative rounded-3xl overflow-hidden h-64 shadow-lg group cursor-pointer">
                 <Image
-                  src="/marmore1.jpeg" // Certifique-se que esta imagem existe em public/
+                  src="/marmore1.jpeg" // Mantenha essa imagem no public ou troque
                   alt="Banner"
                   fill
                   className="object-cover brightness-50 group-hover:scale-105 transition-transform duration-500"
@@ -182,10 +211,7 @@ export default async function BlogPost({ params }: PageProps) {
                   <p className="text-sm opacity-90 mb-4">
                     Descubra o mármore ideal para o seu projeto.
                   </p>
-                  <a
-                    href="https://wa.me/61985921488"
-                    className="bg-white text-black px-6 py-2 rounded-full font-bold hover:bg-orange-500 hover:text-white transition-colors text-sm"
-                  >
+                  <a href="https://wa.me/61985921488" className="bg-white text-black px-6 py-2 rounded-full font-bold hover:bg-orange-500 hover:text-white transition-colors text-sm">
                     Falar Agora
                   </a>
                 </div>
