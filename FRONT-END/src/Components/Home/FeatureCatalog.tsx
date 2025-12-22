@@ -1,39 +1,55 @@
-"use client"; // <--- Importante: Agora precisa ser Client Component
+"use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ProductCard } from "@/Components/Catalogo/ProductCard";
-import { ProductModal } from "@/Components/ui/ProductModal"; // Ajuste o caminho
-import { products } from "@/data/products";
 import { ArrowRight } from "lucide-react";
 
-// Precisamos tipar o estado do produto selecionado
-type ProductType = (typeof products)[0];
+// 1. Importações do Supabase e Tipos Corretos
+import { supabase } from "@/lib/supabase";
+import { ProductCard, ProductType } from "@/Components/Catalogo/ProductCard"; // Importamos o tipo do Card, não do arquivo de dados!
+import { ProductModal } from "@/Components/ui/ProductModal";
 
 export function FeaturedCatalog() {
-  // 1. Estado para controlar qual produto está aberto
-  const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(
-    null,
-  );
+  // 2. Estado para guardar os produtos que vêm do Banco
+  const [products, setProducts] = useState<ProductType[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // 2. Funções para abrir e fechar
+  // 3. Buscar 4 produtos do Supabase
+  useEffect(() => {
+    async function fetchFeaturedProducts() {
+      const { data, error } = await supabase
+        .from('produtos') // Nome da sua tabela
+        .select('*')
+        .limit(4); // Pega apenas 4 para destaque
+
+      if (data) {
+        setProducts(data);
+      }
+      setIsLoading(false);
+    }
+
+    fetchFeaturedProducts();
+  }, []);
+
   const openModal = (product: ProductType) => setSelectedProduct(product);
   const closeModal = () => setSelectedProduct(null);
 
-  const featuredProducts = products.slice(0, 4);
+  // Loading simples para não quebrar o layout
+  if (isLoading) return <div className="py-20 text-center">Carregando catálogo...</div>;
 
   return (
     <>
-      <section className="w-full py-8 bg-white ">
-        <div className="max-w-full mx-auto px-22">
-          {" "}
-          {/* Ajustei max-w-full para 7xl para não esticar demais */}
+      <section className="w-full py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          
+          {/* Cabeçalho */}
           <div className="flex flex-col md:flex-row justify-between items-end gap-6 border-t border-gray-100 pb-6 pt-6">
             <div>
               <span className="text-orange-600 font-bold uppercase tracking-wider text-xs">
                 Nossa Coleção
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-black-90 mt-2">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
                 Pedras em Destaque
               </h2>
             </div>
@@ -49,10 +65,11 @@ export function FeaturedCatalog() {
               />
             </Link>
           </div>
+
+          {/* Grid de Produtos */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredProducts.map((product) => (
+            {products.map((product) => (
               <div key={product.id} className="h-full">
-                {/* 3. Passamos a função onClick para o card */}
                 <ProductCard
                   data={product}
                   onClick={() => openModal(product)}
@@ -63,9 +80,9 @@ export function FeaturedCatalog() {
         </div>
       </section>
 
-      {/* 4. O componente Modal fica aqui, fora do loop */}
+      {/* Modal */}
       <ProductModal
-        isOpen={!!selectedProduct} // true se tiver produto, false se null
+        isOpen={!!selectedProduct}
         product={selectedProduct}
         onClose={closeModal}
       />
