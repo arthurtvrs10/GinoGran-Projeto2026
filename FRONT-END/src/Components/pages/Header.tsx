@@ -15,31 +15,65 @@ export default function Header() {
         <div className="max-w-full mx-auto flex justify-between items-center px-22 sm:px-22">
           <nav>
             <ul className="flex items-center space-x-6">
-              <li><Link href="#" className="uppercase tracking-wider hover:text-black transition-colors">Sobre</Link></li>
-              <li><Link href="#" className="uppercase tracking-wider hover:text-black transition-colors">Blog</Link></li>
-              <li><Link href="#" className="uppercase tracking-wider hover:text-black transition-colors">Contato</Link></li>
-              <li><Link href="#" className="uppercase tracking-wider hover:text-black transition-colors">Imprensa</Link></li>
+              <li>
+                <Link
+                  href="/blog"
+                  className="uppercase tracking-wider hover:text-black transition-colors"
+                >
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/whatsapp"
+                  className="uppercase tracking-wider hover:text-black transition-colors"
+                >
+                  Contato
+                </Link>
+              </li>
             </ul>
           </nav>
-          
+
           <div className="flex items-center gap-4">
-            
-            <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-[#E1306C] transition-colors">
-               <FaInstagram className="w-4 h-4" /> 
+            <Link
+              href="https://www.instagram.com/ginogran.marmores/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="hover:text-[#E1306C] transition-colors"
+            >
+              <FaInstagram className="w-4 h-4" />
             </Link>
 
-            <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-[#1877F2] transition-colors">
-               <FaFacebookF className="w-4 h-4" />
+            <Link
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="hover:text-[#1877F2] transition-colors"
+            >
+              <FaFacebookF className="w-4 h-4" />
             </Link>
 
-            <Link href="https://pinterest.com" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" className="hover:text-[#BD081C] transition-colors">
-               <FaPinterest className="w-4 h-4" /> 
+            <Link
+              href="https://pinterest.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Pinterest"
+              className="hover:text-[#BD081C] transition-colors"
+            >
+              <FaPinterest className="w-4 h-4" />
             </Link>
 
-            <Link href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="hover:text-[#FF0000] transition-colors">
-               <FaYoutube className="w-4 h-4" />
+            <Link
+              href="https://youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+              className="hover:text-[#FF0000] transition-colors"
+            >
+              <FaYoutube className="w-4 h-4" />
             </Link>
-
           </div>
         </div>
       </header>
@@ -73,17 +107,17 @@ export default function Header() {
             </a>
 
             <a
-              href="/Catalogo"
-              className="flex items-center gap-1 cursor-pointer group text-gray-700 hover:text-black transition-colors"
-            >
-              <span className="font-medium text-sm">Catálogo</span>
-            </a>
-
-            <a
               href="/trabalhos"
               className="text-gray-700 hover:text-black font-medium text-sm transition-colors"
             >
               Trabalhos
+            </a>
+            
+            <a
+              href="/Catalogo"
+              className="flex items-center gap-1 cursor-pointer group text-gray-700 hover:text-black transition-colors"
+            >
+              <span className="font-medium text-sm">Catálogo</span>
             </a>
 
             <a

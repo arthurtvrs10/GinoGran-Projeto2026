@@ -1,4 +1,5 @@
 import Cta from "@/Components/pages/CTA";
+import MapGinogran from "@/Components/pages/map";
 import HeroSection from "@/Components/SobreNos/HeroSection";
 import History from "@/Components/SobreNos/History";
 import { TeamSection } from "@/Components/SobreNos/TeamSection";
@@ -19,8 +20,13 @@ export default function SobreNos() {
       {/* --- VALORES / DIFERENCIAIS ---  Quebra o ritmo de leitura com ícones e texto curto. */}
       <ValoresEDiferenciais />
 
+      {/* --- MAPA GINO GRAN --- */}
+      <MapGinogran />
+
       {/* --- CALL TO ACTION (CTA) --- */}
       <Cta />
+
+      
     </div>
   );
 }

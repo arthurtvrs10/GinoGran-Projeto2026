@@ -1,21 +1,66 @@
-{
-  /**  Preciso criar uma API para isso, mas para teste pode ser por aqui localmente
-export const products = [
+// Preciso criar uma API para isso, mas para teste pode ser por aqui localmente
+// src/data/products.ts
+
+export interface Product {
+  id: number;
+  title: string;
+  image: string;
+  price: string;
+  category: string;
+  color: string;
+  finish: string;
+}
+
+export const products: Product[] = [
   {
     id: 1,
     title: "Mármore Branco Carrara Extra Premium",
-    image: "/Marmore1.jpeg", // Certifique-se que esta imagem existe na pasta public
+    image: "/Marmore1.jpeg",
     price: "R$ 1.200,00",
-    // PROPRIEDADES OBRIGATÓRIAS PARA O FILTRO FUNCIONAR:
-    category: "Mármore", 
+    category: "Mármore",
     color: "Branco",
-    finish: "Polido"
+    finish: "Polido",
   },
-  
-];**/
-}
+  {
+    id: 2,
+    title: "Granito Preto São Gabriel",
+    image: "/Marmore2.jpeg",
+    price: "R$ 650,00",
+    category: "Granito",
+    color: "Preto",
+    finish: "Levigado",
+  },
+  {
+    id: 3,
+    title: "Quartzo Branco Stellar",
+    image: "/Marmore3.jpeg",
+    price: "R$ 1.800,00",
+    category: "Quartzo",
+    color: "Branco",
+    finish: "Polido",
+  },
+  {
+    id: 4,
+    title: "Travertino Romano Bruto",
+    image: "/Marmore1.jpeg",
+    price: "R$ 950,00",
+    category: "Travertino",
+    color: "Bege",
+    finish: "Bruto",
+  },
+  {
+    id: 5,
+    title: "Mármore Marrom Imperador",
+    image: "/Marmore2.jpeg",
+    price: "R$ 1.450,00",
+    category: "Mármore",
+    color: "Marrom",
+    finish: "Polido",
+  },
+  // Copie e cole o bloco acima para adicionar mais produtos...
+];
 
-const materials = ["Mármore", "Granito", "Quartzo", "Travertino", "Onyx"];
+/**const materials = ["Mármore", "Granito", "Quartzo", "Travertino", "Onyx"];
 const colors = ["Branco", "Preto", "Cinza", "Bege", "Verde", "Rosa", "Marrom"];
 const qualities = ["Premium", "Extra", "Importado", "Nacional", "Super"];
 const finishes = ["Polido", "Levigado", "Escovado"];
@@ -53,4 +98,4 @@ export const products = Array.from({ length: 12 }).map((_, index) => {
     color: color,
     finish: finish,
   };
-});
+});*/

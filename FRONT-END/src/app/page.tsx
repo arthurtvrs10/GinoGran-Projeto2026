@@ -1,6 +1,7 @@
 import BlogSection from "@/Components/Home/BlogSection";
 import CtaSection from "@/Components/Home/CtaSection";
-import {FeaturedCatalog} from "@/Components/Home/FeatureCatalog";
+import { FeaturedCatalog } from "@/Components/Home/FeatureCatalog";
+import FeaturedWorks from "@/Components/Home/FeatureMarks";
 import FeaturesBar from "@/Components/Home/FeaturesBar";
 import Slider from "@/Components/Home/Slider";
 
@@ -16,7 +17,10 @@ export default function Home() {
       <Slider images={minhasFotos} />
       <FeaturesBar />
       <FeaturedCatalog />
-      <CtaSection/>
+      <CtaSection />
+
+      <FeaturedWorks />
+
       {/* --- SEÇÃO DE BLOG --- */}
       <BlogSection />
     </main>

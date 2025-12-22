@@ -1,37 +1,53 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase"; // <--- 1. Importando o cliente
 import { ProductCard, ProductType } from "@/Components/Catalogo/ProductCard";
 import { SidebarFilter } from "@/Components/Catalogo/SidebarFilter";
-import { products } from "@/data/products";
+// Removi: import { products } from "@/data/products"; <--- Não usamos mais
 import Cta from "@/Components/pages/CTA";
 import { ProductModal } from "@/Components/ui/ProductModal";
 
-// 1. Interface local para tipar o Estado (resolve o erro do 'any')
-
-const parsePrice = (priceString: string) => {
-  if (!priceString) return 0;
-  return parseFloat(
-    priceString
-      .replace("R$", "")
-      .replace(/\./g, "")
-      .replace(",", ".")
-      .trim(),
-  );
-};
-
 export default function Home() {
+  // --- ESTADO DOS PRODUTOS (Vindo do Banco) ---
+  const [products, setProducts] = useState<ProductType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   // --- ESTADOS DE FILTRO ---
   const [selectedMaterials, setSelectedMaterials] = useState<string[]>([]);
   const [selectedFinish, setSelectedFinish] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [priceRange, setPriceRange] = useState({ min: "", max: "" });
 
-  // --- 2. ESTADOS DO MODAL (Agora tipados corretamente) ---
+  // --- ESTADOS DO MODAL ---
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(null);
 
-  // Lógica de Filtros
+  // --- 2. BUSCAR DADOS DO SUPABASE ---
+  useEffect(() => {
+    async function fetchProducts() {
+      console.log("1. Iniciando busca...");
+      
+      const { data, error } = await supabase
+        .from('produtos') // <--- VERIFIQUE SE O NOME ESTÁ IGUAL NO SUPABASE
+        .select('*');
+
+      console.log("2. Resposta do Supabase:", { data, error });
+
+      if (error) {
+        console.error("3. DEU ERRO:", error.message);
+        alert("Erro no Supabase: " + error.message); // Vai pular um alerta na tela se der erro
+      } else {
+        console.log("3. Sucesso! Dados encontrados:", data);
+        setProducts(data || []);
+      }
+      setIsLoading(false);
+    }
+
+    fetchProducts();
+  }, []);
+
+  // Lógica de Filtros (Eventos)
   const toggleMaterial = (material: string) => {
     if (selectedMaterials.includes(material)) {
       setSelectedMaterials((prev) => prev.filter((item) => item !== material));
@@ -51,32 +67,36 @@ export default function Home() {
     setPriceRange({ min: "", max: "" });
   };
 
-  // --- 3. LÓGICA DE ABRIR/FECHAR MODAL ---
+  // --- LÓGICA DE ABRIR/FECHAR MODAL ---
   const handleOpenModal = (product: ProductType) => {
-    setSelectedProduct(product); // Salva o produto clicado
-    setIsModalOpen(true);        // Abre o modal
+    setSelectedProduct(product);
+    setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    // Limpa o produto selecionado após a animação (opcional)
-    setTimeout(() => setSelectedProduct(null), 300); 
+    setTimeout(() => setSelectedProduct(null), 300);
   };
 
-  // Filtragem
+  // --- 3. FILTRAGEM (Atualizada para usar números diretos) ---
   const filteredProducts = products.filter((product) => {
+    // Filtro de Categoria/Material
     const matchesMaterial =
       selectedMaterials.length === 0 ||
       (product.category && selectedMaterials.includes(product.category));
 
-    const productPrice = parsePrice(product.price);
+    // Filtro de Preço (MUITO MAIS SIMPLES AGORA)
+    // Como no banco já é number, usamos direto
+    const productPrice = product.price; 
     const min = priceRange.min ? parseFloat(priceRange.min) : 0;
     const max = priceRange.max ? parseFloat(priceRange.max) : Infinity;
     const matchesPrice = productPrice >= min && productPrice <= max;
 
+    // Filtro de Acabamento
     const matchesFinish =
       selectedFinish === "" || product.finish === selectedFinish;
 
+    // Filtro de Cor
     const matchesColor =
       selectedColor === "" || product.color === selectedColor;
 
@@ -108,17 +128,22 @@ export default function Home() {
               Catálogo de Mármores
             </h1>
             <p className="text-gray-500 mt-1">
-              {filteredProducts.length} produtos encontrados
+              {isLoading ? "Carregando..." : `${filteredProducts.length} produtos encontrados`}
             </p>
           </header>
 
-          {filteredProducts.length > 0 ? (
+          {/* 4. LOADING STATE E GRID */}
+          {isLoading ? (
+             // Um Loading simples enquanto carrega
+            <div className="flex justify-center items-center h-64">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-stone-800"></div>
+            </div>
+          ) : filteredProducts.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredProducts.map((product) => (
-                <ProductCard 
-                  key={product.id} 
-                  data={product} 
-                  // 4. PASSA A AÇÃO DE CLIQUE PARA O CARD
+                <ProductCard
+                  key={product.id}
+                  data={product}
                   onClick={() => handleOpenModal(product)}
                 />
               ))}
@@ -141,11 +166,10 @@ export default function Home() {
 
       <Cta />
 
-      {/* 5. MODAL POSICIONADO FORA DO MAIN */}
-      <ProductModal 
-        isOpen={isModalOpen} 
-        onClose={handleCloseModal} 
-        product={selectedProduct} 
+      <ProductModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        product={selectedProduct}
       />
     </div>
   );

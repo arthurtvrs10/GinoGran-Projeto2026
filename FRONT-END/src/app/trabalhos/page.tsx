@@ -8,7 +8,10 @@ import "photoswipe/dist/photoswipe.css";
 import { projects } from "@/data/projects";
 
 // Gera as categorias automaticamente
-const categories = ["Todos", ...Array.from(new Set(projects.map((p) => p.category)))];
+const categories = [
+  "Todos",
+  ...Array.from(new Set(projects.map((p) => p.category))),
+];
 
 export default function TrabalhosPage() {
   const [filter, setFilter] = useState("Todos");
@@ -24,7 +27,7 @@ export default function TrabalhosPage() {
 
   const handleCategoryChange = (cat: string) => {
     setFilter(cat);
-    setVisibleCount(10); 
+    setVisibleCount(10);
   };
 
   const handleLoadMore = () => {
@@ -33,10 +36,8 @@ export default function TrabalhosPage() {
 
   return (
     <div className="w-full bg-white min-h-screen pb-20">
-      
       {/* --- HERO SECTION (MODELO EXATO SOLICITADO) --- */}
       <section className="relative w-full h-[400px] flex items-center justify-center bg-gray-900 overflow-hidden">
-        
         {/* Imagem de Fundo (Estilo Opacidade 40% sem overlay extra) */}
         <div className="absolute inset-0 opacity-40">
           <Image
@@ -50,21 +51,20 @@ export default function TrabalhosPage() {
 
         {/* Conteúdo Centralizado */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-[22px] text-center">
-          
           {/* Subtítulo Dourado */}
           <span className="block text-[#F9A825] font-semibold tracking-widest uppercase mb-4 text-sm md:text-base">
             Portfólio Exclusivo
           </span>
-          
+
           {/* Título Principal */}
-          <h1 className="text-4xl md:text-6xl font-light text-white mb-6 font-bold">
+          <h1 className="text-4xl md:text-6xl  text-white mb-6 font-bold">
             Nossos Trabalhos
           </h1>
-          
+
           {/* Descrição */}
           <p className="text-gray-200 max-w-2xl mx-auto text-lg font-light leading-relaxed mb-8">
-            Transformamos a força da natureza em sofisticação para o seu ambiente.
-            Confira nossa galeria de projetos executados.
+            Transformamos a força da natureza em sofisticação para o seu
+            ambiente. Confira nossa galeria de projetos executados.
           </p>
 
           {/* --- BOTÕES DE FILTRO (Integrados ao design) --- */}
@@ -85,19 +85,16 @@ export default function TrabalhosPage() {
               </button>
             ))}
           </div>
-
         </div>
       </section>
 
       {/* --- GRID MASONRY (GALERIA) --- */}
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-16">
-        
         <Gallery>
           <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-            
             {displayedProjects.map((project) => (
-              <div 
-                key={project.id} 
+              <div
+                key={project.id}
                 className="break-inside-avoid group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-gray-100"
               >
                 <Item
@@ -108,7 +105,7 @@ export default function TrabalhosPage() {
                   caption={project.title}
                 >
                   {({ ref, open }) => (
-                    <div 
+                    <div
                       className="cursor-zoom-in relative w-full"
                       onClick={open}
                     >
@@ -121,8 +118,8 @@ export default function TrabalhosPage() {
                         className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
-                      
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+
+                      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                         <span className="text-[#F9A825] text-xs font-bold uppercase tracking-wider mb-1">
                           {project.category}
                         </span>
@@ -135,7 +132,6 @@ export default function TrabalhosPage() {
                 </Item>
               </div>
             ))}
-            
           </div>
         </Gallery>
 
@@ -147,13 +143,18 @@ export default function TrabalhosPage() {
               className="group flex items-center gap-2 px-8 py-3 bg-white text-gray-900 font-bold rounded-full border-2 border-gray-200 hover:border-[#F9A825] hover:text-[#F9A825] transition-all duration-300 shadow-sm hover:shadow-md"
             >
               <span>Carregar mais projetos</span>
-              <svg 
-                className="w-4 h-4 group-hover:translate-y-1 transition-transform duration-300" 
-                fill="none" 
-                stroke="currentColor" 
+              <svg
+                className="w-4 h-4 group-hover:translate-y-1 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
           </div>
@@ -162,10 +163,11 @@ export default function TrabalhosPage() {
         {/* Empty State */}
         {allFilteredProjects.length === 0 && (
           <div className="text-center py-20">
-            <p className="text-gray-400 text-lg">Nenhum projeto encontrado nesta categoria.</p>
+            <p className="text-gray-400 text-lg">
+              Nenhum projeto encontrado nesta categoria.
+            </p>
           </div>
         )}
-
       </main>
     </div>
   );

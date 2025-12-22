@@ -5,7 +5,7 @@ export interface ProductType {
   id: number;
   title: string;
   image: string;
-  price: string;
+  price: number;
   category?: string;
   finish?: string;
   color?: string;
@@ -14,17 +14,17 @@ export interface ProductType {
 
 // 2. Usamos esse tipo dentro das Props do Card
 interface ProductProps {
-  data: ProductType; 
+  data: ProductType;
   onClick?: () => void;
 }
 
 export function ProductCard({ data, onClick }: ProductProps) {
   return (
-    <div 
+    <div
       onClick={onClick}
-      role="button" 
+      role="button"
       tabIndex={0}
-      className={`group relative flex flex-col bg-white rounded-md border border-stone-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden h-full ${onClick ? 'cursor-pointer' : ''}`}
+      className={`group relative flex flex-col bg-white rounded-md border border-stone-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden h-full ${onClick ? "cursor-pointer" : ""}`}
     >
       {/* Imagem */}
       <div className="relative w-full aspect-3/2 overflow-hidden bg-stone-100">
@@ -36,7 +36,10 @@ export function ProductCard({ data, onClick }: ProductProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute bottom-0 right-0 bg-stone-900 text-white px-3 py-1 text-xs font-semibold rounded-tl-md">
-          {data.price}
+          {new Intl.NumberFormat('pt-BR', { 
+          style: 'currency', 
+            currency: 'BRL' 
+          }).format(Number(data.price))}
         </div>
       </div>
 
@@ -53,8 +56,18 @@ export function ProductCard({ data, onClick }: ProductProps) {
 
         <div className="mt-3 pt-2 border-t border-stone-100 flex items-center justify-between">
           <span className="text-xs text-stone-400">Ver detalhes</span>
-          <svg className="w-4 h-4 text-stone-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+          <svg
+            className="w-4 h-4 text-stone-400 group-hover:translate-x-1 transition-transform"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 5l7 7-7 7"
+            ></path>
           </svg>
         </div>
       </div>

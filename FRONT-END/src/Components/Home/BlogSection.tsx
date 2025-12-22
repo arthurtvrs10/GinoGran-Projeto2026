@@ -18,15 +18,17 @@ export default function BlogSection() {
             </h2>
           </div>
 
-          <Link 
-            href="/Blog" 
+          <Link
+            href="/Blog"
             className="group flex items-center gap-2 text-gray-600 font-bold hover:text-orange-600 transition-colors mb-2 md:mb-0"
           >
             Ver blog completo
-            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            <ArrowRight
+              size={20}
+              className="group-hover:translate-x-1 transition-transform"
+            />
           </Link>
         </div>
-        
 
         {/* Grid de Posts */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
