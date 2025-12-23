@@ -1,9 +1,19 @@
+import { Metadata } from "next"; // Importar Metadata
 import BlogSection from "@/Components/Home/BlogSection";
 import CtaSection from "@/Components/Home/CtaSection";
 import { FeaturedCatalog } from "@/Components/Home/FeatureCatalog";
 import FeaturedWorks from "@/Components/Home/FeatureMarks";
 import FeaturesBar from "@/Components/Home/FeaturesBar";
 import Slider from "@/Components/Home/Slider";
+
+// --- OPEN GRAPH ESPECÍFICO DA HOME ---
+export const metadata: Metadata = {
+  title: "Início", // Vai ficar: Início | Ginogran
+  description: "Descubra a elegância das pedras naturais. Mármores e Granitos selecionados para o seu projeto.",
+  openGraph: {
+    title: "Ginogran - Excelência em Pedras Naturais",
+  }
+};
 
 export default function Home() {
   const minhasFotos = [
@@ -18,10 +28,7 @@ export default function Home() {
       <FeaturesBar />
       <FeaturedCatalog />
       <CtaSection />
-
       <FeaturedWorks />
-
-      {/* --- SEÇÃO DE BLOG --- */}
       <BlogSection />
     </main>
   );
