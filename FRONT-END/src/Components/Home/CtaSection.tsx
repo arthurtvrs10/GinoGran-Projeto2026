@@ -6,7 +6,7 @@ export default function CtaSection() {
     <div className="relative w-full h-[300px] py-32 flex flex-col items-center justify-center px-6 text-center">
       <div className="absolute inset-0 w-full h-full">
         <Image
-          src="/Marmore1.jpeg" // <--- TROQUE pelo caminho da sua imagem na pasta public
+          src="https://gxqcjmjfipmxvdmflabu.supabase.co/storage/v1/object/public/imagens-sections/cta-section-bg.jpg" // <--- TROQUE pelo caminho da sua imagem na pasta public
           alt="Fundo do CTA"
           fill // Faz a imagem esticar para cobrir todo o container
           className="object-cover" // Garante que a imagem não fique distorcida (corta as bordas se precisar)
