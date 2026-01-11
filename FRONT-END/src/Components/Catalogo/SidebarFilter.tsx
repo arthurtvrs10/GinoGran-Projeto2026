@@ -25,7 +25,7 @@ export function SidebarFilter({
   onClear,
 }: FilterProps) {
   // Lista de materiais disponíveis
-  const materials = ["Mármore", "Granito", "Quartzo", "Travertino", "Onyx"]; // Atualizei para bater com o mock
+  const materials = ["Mármore", "Quartzo", "Quartzito"]; // Atualizei para bater com o mock
 
   return (
     <aside className="w-full md:w-64 flex flex-col gap-8 p-4 md:pr-6 border-r border-stone-100 bg-white">
@@ -79,9 +79,9 @@ export function SidebarFilter({
           className="w-full p-2 text-sm border border-stone-200 rounded bg-white text-stone-600 focus:outline-none focus:border-stone-500"
         >
           <option value="">Qualquer</option>
-          <option value="polido">Polido (Brilhante)</option>
-          <option value="levigado">Levigado (Fosco)</option>
-          <option value="escovado">Escovado (Rústico)</option>
+          <option value="Polido">Polido (Brilhante)</option>
+          <option value="Levigado">Levigado (Fosco)</option>
+          <option value="Escovado">Escovado (Rústico)</option>
         </select>
       </div>
 
@@ -118,45 +118,7 @@ export function SidebarFilter({
         </div>
       </div>
 
-      {/* 3. Faixa de Preço */}
-      <div className="flex flex-col gap-3">
-        <h3 className="text-sm font-bold text-stone-700 uppercase tracking-wide">
-          Preço / m²
-        </h3>
-        <div className="flex items-center gap-2">
-          <div className="relative w-full">
-            <span className="absolute left-2 top-2 text-stone-400 text-xs">
-              R$
-            </span>
-            <input
-              type="number"
-              placeholder="Min"
-              className="w-full pl-6 pr-2 py-1 text-sm border border-stone-200 rounded focus:border-stone-500 focus:outline-none"
-              // Lógica conectada:
-              value={priceRange.min}
-              onChange={(e) =>
-                setPriceRange({ ...priceRange, min: e.target.value })
-              }
-            />
-          </div>
-          <span className="text-stone-400">-</span>
-          <div className="relative w-full">
-            <span className="absolute left-2 top-2 text-stone-400 text-xs">
-              R$
-            </span>
-            <input
-              type="number"
-              placeholder="Max"
-              className="w-full pl-6 pr-2 py-1 text-sm border border-stone-200 rounded focus:border-stone-500 focus:outline-none"
-              // Lógica conectada:
-              value={priceRange.max}
-              onChange={(e) =>
-                setPriceRange({ ...priceRange, max: e.target.value })
-              }
-            />
-          </div>
-        </div>
-      </div>
+      
     </aside>
   );
 }

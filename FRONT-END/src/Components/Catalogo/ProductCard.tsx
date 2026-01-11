@@ -5,7 +5,6 @@ export interface ProductType {
   id: number;
   title: string;
   image: string;
-  price: number;
   category?: string;
   finish?: string;
   color?: string;
@@ -35,12 +34,6 @@ export function ProductCard({ data, onClick }: ProductProps) {
           className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        <div className="absolute bottom-0 right-0 bg-stone-900 text-white px-3 py-1 text-xs font-semibold rounded-tl-md">
-          {new Intl.NumberFormat('pt-BR', { 
-          style: 'currency', 
-            currency: 'BRL' 
-          }).format(Number(data.price))}
-        </div>
       </div>
 
       {/* Texto */}

@@ -79,12 +79,6 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
           </div>
 
           <div className="flex items-center justify-between mt-auto pt-6 border-t border-gray-100">
-            <span className="text-2xl font-bold text-gray-900">
-              {new Intl.NumberFormat('pt-BR', { 
-              style: 'currency', 
-              currency: 'BRL' 
-              }).format(Number(product.price))}
-            </span>
 
             <a
               href={`https://wa.me/61985921488?text=Tenho interesse no ${product.title}`}
