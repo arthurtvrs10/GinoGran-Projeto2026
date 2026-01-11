@@ -8,15 +8,15 @@ import { IconType } from "react-icons";
 // --- Dados para os links (fácil de gerenciar) ---
 const quickLinks = [
   { href: "/", label: "Início" },
-  { href: "/produtos", label: "Produtos" },
-  { href: "/galeria", label: "Galeria" },
+  { href: "/Catalogo", label: "Catalogo" },
+  { href: "/trabalhos", label: "Galeria" },
   { href: "/sobre", label: "Sobre Nós" },
   { href: "/contato", label: "Contato" },
 ];
 
 const productLinks = [
-  { href: "/produtos/marmores", label: "Mármores" },
-  { href: "/produtos/granitos", label: "Granitos" },
+  { href: "Catalogo", label: "Mármores" },
+  { href: "/Catalogo", label: "Granitos" },
 ];
 
 const legalLinks = [
