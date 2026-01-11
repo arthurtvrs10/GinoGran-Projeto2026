@@ -96,7 +96,6 @@ export function SidebarFilter({
             { name: "Preto", color: "bg-stone-900 border-stone-900" },
             { name: "Cinza", color: "bg-gray-400 border-gray-400" },
             { name: "Bege", color: "bg-[#E6DCC3] border-[#D6CCB3]" },
-            { name: "Verde", color: "bg-emerald-800 border-emerald-800" },
             { name: "Marrom", color: "bg-[#5D4037] border-[#5D4037]" },
           ].map((c) => {
             const isSelected = selectedColor === c.name;
@@ -117,8 +116,6 @@ export function SidebarFilter({
           })}
         </div>
       </div>
-
-      
     </aside>
   );
 }
