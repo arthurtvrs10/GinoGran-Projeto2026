@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import {
   FaInstagram,
@@ -6,8 +7,13 @@ import {
   FaPinterest,
   FaYoutube,
 } from "react-icons/fa6";
+import { HiMenu, HiX } from "react-icons/hi"; // Ícones para o menu
+import { FaArrowRight } from "react-icons/fa";
 
 export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+  const closeMenu = () => setIsOpen(false);
+
   return (
     <>
       {/* 1. TOP HEADER */}
@@ -79,9 +85,9 @@ export default function Header() {
       </header>
 
       {/* 2. HEADER */}
-      <header className="w-full h-[71px] bg-slate-50 border-b border-gray-200 px-22 py-4">
+      <header className="w-full h-[71px] bg-slate-50 border-b border-gray-200 px-4 md:px-22 py-4">
         <div className="w-full max-w-full flex items-center justify-between ">
-          <a href="/ " className="flex items-center gap-3">
+          <a href="/ " className="flex items-center gap-3" onClick={closeMenu}>
             <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center shadow-sm">
               <span className="text-[#F9A825] font-bold text-lg tracking-tighter">
                 GG
@@ -128,13 +134,50 @@ export default function Header() {
             </a>
           </nav>
 
-          <button className="md:hidden text-gray-700">
+          {/* Botão do menu mobile */}
+
+          <button className="md:hidden text-gray-700" onClick={() => setIsOpen(!isOpen)}>
             <span className="block w-6 h-0.5 bg-current mb-1"></span>
             <span className="block w-6 h-0.5 bg-current mb-1"></span>
             <span className="block w-6 h-0.5 bg-current"></span>
           </button>
         </div>
       </header>
+
+      {/* 3. MENU MOBILE OVERLAY */}
+      <div className={`
+        fixed inset-0 top-[71px] bg-white z-40 transition-transform duration-300 md:hidden
+        ${isOpen ? "translate-x-0" : "translate-x-full"}
+      `}>
+        <nav className="flex flex-col p-6 gap-6">
+          <Link href="/SobreNos" onClick={closeMenu} className="text-lg font-medium border-b border-gray-100 pb-4">
+            Sobre Nós
+          </Link>
+          <Link href="/trabalhos" onClick={closeMenu} className="text-lg font-medium border-b border-gray-100 pb-4">
+            Trabalhos
+          </Link>
+          <Link href="/contato" onClick={closeMenu} className="text-lg font-medium border-b border-gray-100 pb-4">
+            Contato
+          </Link>
+
+          {/* O SEU BOTÃO (Apenas Mobile) */}
+          <Link
+            href="/Catalogo"
+            onClick={closeMenu}
+            className="flex items-center justify-center gap-2 font-bold transition-all bg-orange-600 text-white px-6 py-4 rounded-full shadow-md"
+          >
+            Ver catálogo completo
+            <FaArrowRight size={18} />
+          </Link>
+
+          {/* Redes Sociais no Mobile */}
+          <div className="flex justify-center gap-8 pt-6">
+             <FaInstagram className="w-6 h-6 text-gray-400" href="" />
+             <FaFacebookF className="w-6 h-6 text-gray-400" />
+             <FaYoutube className="w-6 h-6 text-gray-400" />
+          </div>
+        </nav>
+      </div>
     </>
   );
 }

@@ -40,11 +40,11 @@ export function FeaturedCatalog() {
 
   return (
     <>
-      <section className="w-full py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <section className="w-full py-0 pb-10 md:pb-20 bg-white">
+        <div className="max-w-full mx-auto px-4 md:px-22">
           
           {/* Cabeçalho */}
-          <div className="flex flex-col md:flex-row justify-between items-end gap-6 border-t border-gray-100 pb-6 pt-6">
+          <div className="flex  md:flex-row justify-between items-end gap-6 border-t border-gray-100 pb-6 pt-6">
             <div>
               <span className="text-orange-600 font-bold uppercase tracking-wider text-xs">
                 Nossa Coleção
@@ -56,7 +56,16 @@ export function FeaturedCatalog() {
 
             <Link
               href="/Catalogo"
-              className="group flex items-center gap-2 text-gray-600 font-bold hover:text-orange-600 transition-colors mb-2 md:mb-0"
+              className="
+                group flex items-center gap-2 font-bold transition-all mb-2 md:mb-0
+    
+                /* MOBILE: Estilo Botão */
+                bg-orange-600 text-white px-6 py-3 rounded-full shadow-md
+                
+                /* DESKTOP (md): Volta a ser Link */
+                md:bg-transparent md:text-gray-600 md:px-0 md:py-0 md:rounded-none md:shadow-none 
+                md:hover:text-orange-600 md:transition-colors
+                "
             >
               Ver catálogo completo
               <ArrowRight

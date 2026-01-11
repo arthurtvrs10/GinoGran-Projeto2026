@@ -30,7 +30,7 @@ export default function Benefits() {
     },
   ];
   return (
-    <section className="w-full py-8">
+    <section className="hidden w-full py-8 sm:block">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 max-w-full mx-auto px-22 ">
         {items.map((item, index) => (
           <div
