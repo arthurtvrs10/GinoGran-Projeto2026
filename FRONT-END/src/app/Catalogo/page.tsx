@@ -21,7 +21,6 @@ export default function Home() {
   const [selectedMaterials, setSelectedMaterials] = useState<string[]>([]);
   const [selectedFinish, setSelectedFinish] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("");
-  const [priceRange, setPriceRange] = useState({ min: "", max: "" });
 
   // --- ESTADOS DO MODAL ---
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -63,7 +62,6 @@ export default function Home() {
     setSelectedMaterials([]);
     setSelectedFinish("");
     setSelectedColor("");
-    setPriceRange({ min: "", max: "" });
   };
 
   // --- LÓGICA DO MODAL ---
@@ -83,10 +81,6 @@ export default function Home() {
       selectedMaterials.length === 0 ||
       (product.category && selectedMaterials.includes(product.category));
 
-    const productPrice = product.price; 
-    const min = priceRange.min ? parseFloat(priceRange.min) : 0;
-    const max = priceRange.max ? parseFloat(priceRange.max) : Infinity;
-    const matchesPrice = productPrice >= min && productPrice <= max;
 
     const matchesFinish =
       selectedFinish === "" || product.finish === selectedFinish;
@@ -94,7 +88,7 @@ export default function Home() {
     const matchesColor =
       selectedColor === "" || product.color === selectedColor;
 
-    return matchesMaterial && matchesPrice && matchesFinish && matchesColor;
+    return matchesMaterial && matchesFinish && matchesColor;
   });
 
   return (
@@ -146,8 +140,6 @@ export default function Home() {
               setFinish={setSelectedFinish}
               selectedColor={selectedColor}
               setColor={toggleColor}
-              priceRange={priceRange}
-              setPriceRange={setPriceRange}
               onClear={clearFilters}
             />
 

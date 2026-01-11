@@ -3,8 +3,6 @@
 interface FilterProps {
   selectedMaterials: string[];
   setMaterial: (value: string) => void;
-  priceRange: { min: string; max: string };
-  setPriceRange: (range: { min: string; max: string }) => void;
   onClear: () => void; // Nova prop para o botão de limpar
 
   selectedFinish: string;
@@ -20,8 +18,6 @@ export function SidebarFilter({
   setFinish,
   selectedColor,
   setColor,
-  priceRange,
-  setPriceRange,
   onClear,
 }: FilterProps) {
   // Lista de materiais disponíveis
