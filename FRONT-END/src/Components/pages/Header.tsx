@@ -52,7 +52,7 @@ export default function Header() {
             </Link>
 
             <Link
-              href="https://facebook.com"
+              href="https://www.facebook.com/profile.php?id=61581233687814"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
@@ -71,15 +71,6 @@ export default function Header() {
               <FaPinterest className="w-4 h-4" />
             </Link>
 
-            <Link
-              href="https://youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="YouTube"
-              className="hover:text-[#FF0000] transition-colors"
-            >
-              <FaYoutube className="w-4 h-4" />
-            </Link>
           </div>
         </div>
       </header>
@@ -172,7 +163,7 @@ export default function Header() {
 
           {/* Redes Sociais no Mobile */}
           <div className="flex justify-center gap-8 pt-6">
-             <FaInstagram className="w-6 h-6 text-gray-400" href="" />
+             <FaInstagram className="w-6 h-6 text-gray-400" href="https://www.instagram.com/ginogran.marmores/" />
              <FaFacebookF className="w-6 h-6 text-gray-400" />
              <FaYoutube className="w-6 h-6 text-gray-400" />
           </div>

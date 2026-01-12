@@ -15,18 +15,18 @@ const quickLinks = [
 ];
 
 const productLinks = [
-  { href: "Catalogo", label: "Mármores" },
+  { href: "/Catalogo", label: "Mármores" },
   { href: "/Catalogo", label: "Granitos" },
 ];
 
 const legalLinks = [
-  { href: "/termos", label: "Termos" },
-  { href: "/lgpd", label: "LGPD" },
+  { href: "#", label: "Termos" },
+  { href: "#", label: "LGPD" },
 ];
 
 const socialLinks: { href: string; icon: IconType; ariaLabel: string }[] = [
-  { href: "#", icon: FaFacebookF, ariaLabel: "Facebook" },
-  { href: "#", icon: FaInstagram, ariaLabel: "Instagram" },
+  { href: "https://www.facebook.com/profile.php?id=61581233687814", icon: FaFacebookF, ariaLabel: "Facebook" },
+  { href: "https://www.instagram.com/ginogran.marmores/", icon: FaInstagram, ariaLabel: "Instagram" },
   {
     href: "https://wa.me/5561985921488",
     icon: FaWhatsapp,

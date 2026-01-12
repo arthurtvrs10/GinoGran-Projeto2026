@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Gallery, Item } from "react-photoswipe-gallery";
 import "photoswipe/dist/photoswipe.css";
-import { supabase } from "@/lib/supabase"; // <--- Conexão com o Banco
+import { supabase } from "@/lib/supabase";
 
-// 1. Interfaces de Tipagem (Iguais às que usamos na página de Trabalhos)
+// 1. Interfaces de Tipagem
 interface SupabaseProject {
   id: number;
   category: string;
@@ -32,15 +32,14 @@ export default function FeaturedWorks() {
 
   useEffect(() => {
     async function fetchFeaturedProjects() {
-      // 2. Busca apenas os 6 últimos projetos adicionados
+      // Busca apenas os 6 últimos projetos adicionados
       const { data, error } = await supabase
         .from('projects')
         .select('*')
-        .order('id', { ascending: false }) // Traz os mais novos primeiro
-        .limit(6); // <--- PEGA SÓ 6 PARA A HOME
+        .order('id', { ascending: false })
+        .limit(6);
 
       if (data) {
-        // Converte image_url para src
         const formattedData: GalleryProject[] = data.map((item: SupabaseProject) => ({
           id: item.id,
           category: item.category,
@@ -58,32 +57,31 @@ export default function FeaturedWorks() {
     fetchFeaturedProjects();
   }, []);
 
-  // Se estiver carregando ou não tiver projetos, não mostramos nada ou mostramos skeleton
-  // Aqui optei por mostrar vazio enquanto carrega para não quebrar o layout
-  if (isLoading) return <div className="py-20 text-center">Carregando destaques...</div>;
+  if (isLoading) return <div className="py-20 text-center text-gray-500 font-medium">Carregando destaques...</div>;
 
   return (
     <section className="w-full py-10 bg-white">
-      <div className="max-w-full mx-auto px-4 md:px-22 md:px-22">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
         
         {/* --- CABEÇALHO DA SEÇÃO --- */}
         <div className="text-center mb-12">
           <span className="block text-[#F9A825] font-bold tracking-widest uppercase text-sm mb-2">
             Nosso Portfólio
           </span>
-          
           <p className="mt-2 text-gray-500 max-w-2xl mx-auto">
             Confira algumas das nossas execuções recentes em mármores e granitos de alto padrão.
           </p>
         </div>
 
-        {/* --- GRID MASONRY (Dinâmico) --- */}
+        {/* --- GRID MASONRY (CORRIGIDO) --- */}
         <Gallery>
-          <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+          {/* O segredo do Masonry: columns e gap sem o space-y */}
+          <div className="columns-1 md:columns-2 lg:columns-3 gap-6">
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="break-inside-avoid group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-gray-100"
+                /* break-inside-avoid e mb-6 são essenciais para o Masonry */
+                className="break-inside-avoid mb-6 group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-gray-100"
               >
                 <Item
                   original={project.src}
@@ -96,21 +94,22 @@ export default function FeaturedWorks() {
                     <div
                       className="cursor-zoom-in relative w-full"
                       onClick={open}
+                      /* Define o formato da "caixa" antes da imagem carregar */
+                      style={{ aspectRatio: `${project.width} / ${project.height}` }}
                     >
                       <Image
                         ref={ref as React.Ref<HTMLImageElement>}
                         src={project.src}
                         alt={project.title}
-                        width={project.width}
-                        height={project.height}
-                        className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                        fill // Faz a imagem respeitar o aspectRatio definido no pai
+                        className="object-cover transform group-hover:scale-105 transition-transform duration-700"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
 
                       {/* Overlay Clean */}
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                         <div>
-                          <span className="text-[#F9A825] text-xs font-bold uppercase">
+                          <span className="text-[#F9A825] text-xs font-bold uppercase tracking-wider">
                             {project.category}
                           </span>
                           <h3 className="text-white font-bold text-lg leading-tight">
