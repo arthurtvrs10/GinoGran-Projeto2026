@@ -1,4 +1,3 @@
-import { Metadata } from "next"; // Importar Metadata
 import BlogSection from "@/Components/Home/BlogSection";
 import CtaSection from "@/Components/Home/CtaSection";
 import { FeaturedCatalog } from "@/Components/Home/FeatureCatalog";
@@ -7,7 +6,7 @@ import FeaturesBar from "@/Components/Home/FeaturesBar";
 import Slider from "@/Components/Home/Slider";
 
 // --- OPEN GRAPH ESPECÍFICO DA HOME ---
-export const metadata: Metadata = {
+export const metadata = {
   title: "Início", // Vai ficar: Início | Ginogran
   description: "Descubra a elegância das pedras naturais. Mármores e Granitos selecionados para o seu projeto.",
   openGraph: {
@@ -17,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   const minhasFotos = [
-    "https://placehold.co/600x400/orange/white",
+    "https://gxqcjmjfipmxvdmflabu.supabase.co/storage/v1/object/public/Background/Ginogran.png",
     "https://placehold.co/600x400/purple/white",
     "https://placehold.co/600x400/blue/white",
   ];

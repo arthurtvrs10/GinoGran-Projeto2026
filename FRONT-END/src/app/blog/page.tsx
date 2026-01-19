@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import Image from "next/image";
 import Link from "next/link";
+import CtaSection from "@/Components/Home/CtaSection";
 
 // Tipo igual ao do banco de dados
 interface Post {
@@ -187,7 +188,7 @@ export default function BlogListingPage() {
             </div>
           )}
         </section>
-
+        <CtaSection />
         {/* --- 4. NEWSLETTER (SEU DESIGN ORIGINAL) --- */}
         <section className="mt-24 relative rounded-3xl overflow-hidden bg-gray-900 text-white py-16 px-6 text-center">
           <div className="relative z-10 max-w-2xl mx-auto">

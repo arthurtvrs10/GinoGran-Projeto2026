@@ -1,21 +1,21 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+// import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/Components/pages/Header";
 import Footer from "@/Components/pages/Footer";
+import WhatsAppButton from "@/Components/ui/WhatsAppButton";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 // --- CONFIGURAÇÃO OPEN GRAPH GLOBAL ---
-export const metadata: Metadata = {
+export const metadata = {
   // Use a URL real do seu site quando publicar (ex: https://ginogran.com.br)
   metadataBase: new URL('http://localhost:3000'), 
   title: {
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     siteName: 'Ginogran',
     images: [
       {
-        url: '/Marmore1.jpeg', // Imagem padrão (do seu public/)
+        url: '/logo.png', // Imagem padrão (do seu public/)
         width: 1200,
         height: 630,
         alt: 'Ginogran Mármores e Granitos',
@@ -46,11 +46,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="antialiased">
         <Header />
         {children}
+        <WhatsAppButton phoneNumber="5561985921488" />
         <Footer />
       </body>
     </html>

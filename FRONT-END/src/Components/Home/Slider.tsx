@@ -1,5 +1,6 @@
 "use client"; // Obrigatório para usar useState
 import { useState } from "react";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface sliderProps {
@@ -19,21 +20,25 @@ export default function Slider({ images }: sliderProps) {
     <div className="slider relative w-full h-[400px] m-auto overflow-hidden shadow-xl">
       <button
         onClick={prevSlide}
-        className="absolute top-1/2 left-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-colors"
+        className="absolute z-10 top-1/2 left-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-colors"
       >
         <ChevronLeft />
       </button>
       {images[current] && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={images[current]}
-          alt="slide do slider"
-          className="w-full h-full object-cover"
-        />
+        <div className="relative w-full h-full">
+          <Image
+            src={images[current]}
+            alt="Slider banner"
+            fill
+            priority
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+          />
+        </div>
       )}
       <button
         onClick={nextSlide}
-        className="absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-colors"
+        className="absolute z-10 top-1/2 right-4 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-colors"
       >
         <ChevronRight />
       </button>
