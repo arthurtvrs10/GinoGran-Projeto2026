@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Gallery, Item } from "react-photoswipe-gallery";
 import "photoswipe/dist/photoswipe.css";
 
+// 1. Interfaces de Tipagem
 interface SupabaseProject {
   id: number;
   category: string;
@@ -14,12 +15,6 @@ interface SupabaseProject {
   width: number;
   height: number;
 }
-
-/*Vertical: 800 (width) x 1200 (height).
-
-Horizontal: 1200 (width) x 800 (height).
-
-Quadrada: 1000 (width) x 1000 (height). */
 
 interface GalleryProject {
   id: number;
@@ -41,7 +36,7 @@ export default function TrabalhosPage() {
       const { data, error } = await supabase
         .from('projects')
         .select('*')
-        .order('id', { ascending: true });
+        .order('id', { ascending: false }); // Ordem decrescente para mostrar os mais novos primeiro
 
       if (error) {
         console.error("Erro ao buscar projetos:", error);
@@ -53,8 +48,8 @@ export default function TrabalhosPage() {
           category: item.category,
           title: item.title,
           src: item.image_url,
-          width: item.width,
-          height: item.height
+          width: item.width || 1000, // Fallback de segurança
+          height: item.height || 1200 // Fallback de segurança
         }));
 
         setProjects(formattedData);
@@ -87,7 +82,7 @@ export default function TrabalhosPage() {
   };
 
   return (
-    <div className="w-full bg-white min-h-screen pb-20">
+    <div className="w-full bg-white min-h-screen pb-20 overflow-x-hidden">
       {/* --- HERO SECTION --- */}
       <section className="relative w-full h-[400px] flex items-center justify-center bg-gray-900 overflow-hidden">
         <div className="absolute inset-0 opacity-40">
@@ -129,7 +124,7 @@ export default function TrabalhosPage() {
         </div>
       </section>
 
-      {/* --- GRID MASONRY (CORRIGIDO) --- */}
+      {/* --- GRID MASONRY (CORRIGIDO E RESPONSIVO) --- */}
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-16">
         {isLoading ? (
           <div className="text-center py-20">
@@ -138,13 +133,12 @@ export default function TrabalhosPage() {
           </div>
         ) : (
           <Gallery>
-            {/* O segredo do Masonry: columns-X e gap-X SEM space-y */}
-            <div className="columns-1 md:columns-2 lg:columns-3 gap-6">
+            {/* O segredo do Masonry: block e columns-1 para mobile garantem renderização correta */}
+            <div className="block w-full columns-1 md:columns-2 lg:columns-3 gap-6">
               {displayedProjects.map((project) => (
                 <div
                   key={project.id}
-                  /* break-inside-avoid impede que o card quebre entre colunas. mb-6 dá o espaço vertical */
-                  className="break-inside-avoid mb-6 group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-gray-100"
+                  className="break-inside-avoid mb-6 group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-gray-100 w-full"
                 >
                   <Item
                     original={project.src}
@@ -155,21 +149,22 @@ export default function TrabalhosPage() {
                   >
                     {({ ref, open }) => (
                       <div
-                        className="cursor-zoom-in relative w-full"
+                        className="cursor-zoom-in relative w-full overflow-hidden"
                         onClick={open}
-                        /* Usa a proporção do Supabase para a caixa não "pular" ao carregar */
+                        /* aspectRatio evita 'pulos' de layout no mobile */
                         style={{ aspectRatio: `${project.width} / ${project.height}` }}
                       >
                         <Image
                           ref={ref as React.Ref<HTMLImageElement>}
                           src={project.src}
                           alt={project.title}
-                          fill // Fill garante que a imagem ocupe o espaço do aspectRatio acima
-                          className="object-cover transform group-hover:scale-105 transition-transform duration-700"
+                          fill
+                          className="object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
 
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        {/* Overlay Adaptado: Visível por padrão no mobile para UX */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                           <span className="text-[#F9A825] text-xs font-bold uppercase tracking-wider mb-1">
                             {project.category}
                           </span>

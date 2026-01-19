@@ -1,9 +1,10 @@
 import BlogSection from "@/Components/Home/BlogSection";
 import CtaSection from "@/Components/Home/CtaSection";
 import { FeaturedCatalog } from "@/Components/Home/FeatureCatalog";
-import FeaturedWorks from "@/Components/Home/FeatureMarks";
+import FeaturedWorks from "@/Components/Home/FeatureTrabalhos";
 import FeaturesBar from "@/Components/Home/FeaturesBar";
 import Slider from "@/Components/Home/Slider";
+import TestimonialSection from "@/Components/ui/TestimonialSection";
 
 // --- OPEN GRAPH ESPECÍFICO DA HOME ---
 export const metadata = {
@@ -28,6 +29,7 @@ export default function Home() {
       <FeaturedCatalog />
       <CtaSection />
       <FeaturedWorks />
+      <TestimonialSection />
       <BlogSection />
     </main>
   );
