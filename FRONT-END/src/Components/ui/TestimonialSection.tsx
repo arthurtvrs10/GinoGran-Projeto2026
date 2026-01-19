@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { supabase } from "@/lib/supabase"; // Importação conforme seu arquivo lib/supabase.js
+import { supabase } from "@/lib/supabase";
+import { TestimonialSkeleton } from "@/Components/Skeletons/HomeSkeletons";
 
 // Interface para os dados vindos do banco
 interface Testimonial {
@@ -22,17 +23,20 @@ export default function GinogranPremiumCarousel() {
   // --- BUSCA DE DADOS NO SUPABASE ---
   useEffect(() => {
     async function fetchTestimonials() {
-      setIsLoading(true);
-      const { data, error } = await supabase
-        .from('depoimentos') 
-        .select('*');
+      try {
+        setIsLoading(true);
+        const { data, error } = await supabase
+          .from('depoimentos') 
+          .select('*');
 
-      if (!error && data) {
-        setTestimonials(data);
-      } else {
-        console.error("Erro ao carregar depoimentos:", error?.message);
+        if (!error && data) {
+          setTestimonials(data);
+        }
+      } catch (error) {
+        console.error("Erro ao carregar depoimentos:", error);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     }
     fetchTestimonials();
   }, []);
@@ -60,12 +64,22 @@ export default function GinogranPremiumCarousel() {
     else if (info.offset.x > threshold) prev();
   };
 
-  // Estado de Carregamento (Loading)
+  // --- ESTADO DE CARREGAMENTO (SKELETON) ---
   if (isLoading) {
     return (
-      <div className="py-10 flex justify-center bg-marble dark:bg-black-100">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-primary"></div>
-      </div>
+      <section className="py-10 bg-marble dark:bg-black-100 border-y border-black-20 dark:border-black-80 select-none overflow-hidden">
+        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 items-center">
+          {/* Título Lateral Skeleton */}
+          <div className="md:col-span-1 border-l-4 border-primary/30 pl-4 space-y-2">
+            <div className="h-5 w-24 bg-gray-200 dark:bg-zinc-800 animate-pulse rounded" />
+            <div className="h-3 w-16 bg-gray-100 dark:bg-zinc-900 animate-pulse rounded" />
+          </div>
+          {/* Corpo do Depoimento Skeleton */}
+          <div className="md:col-span-3">
+            <TestimonialSkeleton />
+          </div>
+        </div>
+      </section>
     );
   }
 
@@ -80,7 +94,7 @@ export default function GinogranPremiumCarousel() {
     >
       <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 items-center">
         
-        {/* Título Lateral conforme padrão do layout.tsx */}
+        {/* Título Lateral */}
         <div className="md:col-span-1 border-l-4 border-primary pl-4">
           <h2 className="text-black-900 dark:text-marble font-extrabold text-lg uppercase tracking-tighter">
             Depoimentos
@@ -104,7 +118,7 @@ export default function GinogranPremiumCarousel() {
               >
                 <div className="relative flex-shrink-0">
                   <img 
-                    src={testimonials[index].avatar || '/logo.png'} // Fallback para logo se não houver avatar
+                    src={testimonials[index].avatar || '/logo.png'} 
                     alt={testimonials[index].name}
                     className="w-16 h-16 rounded-full border-2 border-primary grayscale group-hover:grayscale-0 transition-all duration-700 shadow-md object-cover"
                   />
@@ -137,7 +151,7 @@ export default function GinogranPremiumCarousel() {
         </div>
       </div>
 
-      {/* Indicadores Visuais de Tempo e Paginação */}
+      {/* Indicadores Visuais */}
       <div className="flex flex-col items-center gap-3 mt-8">
         <div className="flex gap-2">
           {testimonials.map((_, i) => (
@@ -149,7 +163,7 @@ export default function GinogranPremiumCarousel() {
           ))}
         </div>
         
-        {/* Barra de progresso baseada no estado de pausa */}
+        {/* Barra de progresso */}
         <div className="w-32 h-[1px] bg-black-10 dark:bg-black-90 overflow-hidden">
           <motion.div 
             key={index + (isPaused ? '-paused' : '-running')}
