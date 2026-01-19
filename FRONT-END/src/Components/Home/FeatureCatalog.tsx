@@ -10,22 +10,6 @@ import { supabase } from "@/lib/supabase";
 import { ProductCard, ProductType } from "@/Components/Catalogo/ProductCard";
 import { ProductModal } from "@/Components/ui/ProductModal";
 
-// --- COMPONENTE DE SKELETON (Animação de Loading) ---
-const CatalogSkeleton = () => (
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-    {[...Array(4)].map((_, i) => (
-      <div key={i} className="flex flex-col gap-3">
-        {/* Espaço da Imagem */}
-        <div className="w-full aspect-[5/5] bg-gray-200 dark:bg-black-20 animate-pulse rounded-2xl" />
-        {/* Espaço do Título */}
-        <div className="h-4 w-3/4 bg-gray-200 dark:bg-black-20 animate-pulse rounded-full" />
-        {/* Espaço da Categoria */}
-        <div className="h-3 w-1/2 bg-gray-100 dark:bg-black-30 animate-pulse rounded-full" />
-      </div>
-    ))}
-  </div>
-);
-
 export function FeaturedCatalog() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(null);
@@ -85,9 +69,7 @@ export function FeaturedCatalog() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            {isLoading ? (
-              <CatalogSkeleton />
-            ) : (
+
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {products.map((product) => (
                   <motion.div 
@@ -104,7 +86,6 @@ export function FeaturedCatalog() {
                   </motion.div>
                 ))}
               </div>
-            )}
           </motion.div>
         </div>
       </section>

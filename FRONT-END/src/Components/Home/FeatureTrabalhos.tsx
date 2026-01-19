@@ -27,20 +27,6 @@ interface GalleryProject {
   height: number;
 }
 
-// --- COMPONENTE DE SKELETON PARA O MASONRY ---
-const MasonrySkeleton = () => (
-  <div className="columns-1 md:columns-2 lg:columns-3 gap-6">
-    {[1.2, 0.8, 1.5, 0.9, 1.1, 1.3].map((ratio, i) => (
-      <div 
-        key={i} 
-        className="break-inside-avoid mb-6 rounded-2xl overflow-hidden bg-gray-100 dark:bg-black-80 animate-pulse"
-        style={{ aspectRatio: `${ratio}` }}
-      >
-        <div className="w-full h-full bg-gray-200 dark:bg-black-20" />
-      </div>
-    ))}
-  </div>
-);
 
 export default function FeaturedWorks() {
   const [projects, setProjects] = useState<GalleryProject[]>([]);
@@ -89,9 +75,7 @@ export default function FeaturedWorks() {
 
         {/* ÁREA DE CONTEÚDO */}
         <div className="min-h-[600px]">
-          {isLoading ? (
-            <MasonrySkeleton />
-          ) : (
+
             <motion.div 
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
@@ -144,7 +128,7 @@ export default function FeaturedWorks() {
                 </div>
               </Gallery>
             </motion.div>
-          )}
+
         </div>
 
         {/* BOTÃO VER TODOS */}

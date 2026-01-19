@@ -31,31 +31,6 @@ interface SupabasePostRaw {
   image_url?: string;
 }
 
-// --- COMPONENTE DE SKELETON (Simula o Card do Blog) ---
-const BlogSkeleton = () => (
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-    {[...Array(4)].map((_, i) => (
-      <div key={i} className="bg-white rounded-md overflow-hidden border border-gray-100 shadow-sm">
-        {/* Espaço da Imagem */}
-        <div className="h-48 w-full bg-gray-100 animate-pulse" />
-        {/* Conteúdo */}
-        <div className="p-6 space-y-4">
-          <div className="flex gap-4">
-            <div className="h-3 w-16 bg-gray-100 animate-pulse rounded-full" />
-            <div className="h-3 w-16 bg-gray-100 animate-pulse rounded-full" />
-          </div>
-          <div className="h-5 w-full bg-gray-100 animate-pulse rounded-full" />
-          <div className="space-y-2">
-            <div className="h-3 w-full bg-gray-50 animate-pulse rounded-full" />
-            <div className="h-3 w-2/3 bg-gray-50 animate-pulse rounded-full" />
-          </div>
-          <div className="h-4 w-32 bg-gray-100 animate-pulse rounded-full pt-2" />
-        </div>
-      </div>
-    ))}
-  </div>
-);
-
 export default function BlogSection() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -119,9 +94,7 @@ export default function BlogSection() {
 
         {/* Transição Suave entre Loading e Grid */}
         <div className="min-h-[450px]">
-          {isLoading ? (
-            <BlogSkeleton />
-          ) : (
+          
             <motion.div 
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
               initial={{ opacity: 0, y: 20 }}
@@ -168,7 +141,7 @@ export default function BlogSection() {
                 </article>
               ))}
             </motion.div>
-          )}
+          
         </div>
       </div>
     </section>

@@ -4,7 +4,9 @@ import { FeaturedCatalog } from "@/Components/Home/FeatureCatalog";
 import FeaturedWorks from "@/Components/Home/FeatureTrabalhos";
 import FeaturesBar from "@/Components/Home/FeaturesBar";
 import Slider from "@/Components/Home/Slider";
+import { BlogSkeleton, CatalogSkeleton, TestimonialSkeleton, TrabalhosSkeleton } from "@/Components/Skeletons/HomeSkeletons";
 import TestimonialSection from "@/Components/ui/TestimonialSection";
+import { Suspense } from "react";
 
 // --- OPEN GRAPH ESPECÍFICO DA HOME ---
 export const metadata = {
@@ -26,11 +28,24 @@ export default function Home() {
     <main className="w-full">
       <Slider images={minhasFotos} />
       <FeaturesBar />
-      <FeaturedCatalog />
+
+      <Suspense fallback={<CatalogSkeleton />}>
+        <FeaturedCatalog />
+      </Suspense>
+
       <CtaSection />
-      <FeaturedWorks />
-      <TestimonialSection />
-      <BlogSection />
+
+      <Suspense fallback={<TrabalhosSkeleton />}>
+        <FeaturedWorks />
+      </Suspense>
+      
+      <Suspense fallback={<TestimonialSkeleton />}>
+        <TestimonialSection />
+      </Suspense>
+      
+      <Suspense fallback={<BlogSkeleton />}>
+        <BlogSection />
+      </Suspense>
     </main>
   );
 }
