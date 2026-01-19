@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { supabase } from "@/lib/supabase";
 import { ProductCard, ProductType } from "@/Components/Catalogo/ProductCard";
 import { ProductModal } from "@/Components/ui/ProductModal";
+import { CatalogSkeleton } from "@/Components/Skeletons/HomeSkeletons";
 
 export function FeaturedCatalog() {
   const [products, setProducts] = useState<ProductType[]>([]);
@@ -17,16 +18,20 @@ export function FeaturedCatalog() {
 
   useEffect(() => {
     async function fetchFeaturedProducts() {
-      // Pequeno delay proposital para garantir que o skeleton apareça suavemente (opcional)
-      const { data, error } = await supabase
-        .from('produtos')
-        .select('*')
-        .limit(4);
+      try {
+        const { data, error } = await supabase
+          .from('produtos')
+          .select('*')
+          .limit(4);
 
-      if (data) {
-        setProducts(data);
+        if (data) {
+          setProducts(data);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar produtos:", error);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     }
 
     fetchFeaturedProducts();
@@ -35,13 +40,31 @@ export function FeaturedCatalog() {
   const openModal = (product: ProductType) => setSelectedProduct(product);
   const closeModal = () => setSelectedProduct(null);
 
+  // --- SE ESTIVER CARREGANDO, MOSTRA O SKELETON E PARA AQUI ---
+  if (isLoading) {
+    return (
+      <section className="w-full py-0 pb-10 md:pb-20 bg-white dark:bg-transparent">
+        <div className="max-w-full mx-auto px-4 md:px-22">
+          <div className="flex justify-between items-end gap-6 border-t border-gray-100 pb-6 pt-6 mb-6">
+            <div className="space-y-2">
+              <div className="h-3 w-24 bg-gray-200 animate-pulse rounded-full" />
+              <div className="h-8 w-64 bg-gray-200 animate-pulse rounded-lg" />
+            </div>
+          </div>
+          <CatalogSkeleton />
+        </div>
+      </section>
+    );
+  }
+
+  // --- CONTEÚDO REAL APÓS O CARREGAMENTO ---
   return (
     <>
       <section className="w-full py-0 pb-10 md:pb-20 bg-white dark:bg-transparent">
         <div className="max-w-full mx-auto px-4 md:px-22">
           
-          {/* Cabeçalho - Mantemos fixo para não "sumir" com a tela */}
-          <div className="flex justify-between items-end gap-6 border-t border-gray-100  pb-6 pt-6">
+          {/* Cabeçalho */}
+          <div className="flex justify-between items-end gap-6 border-t border-gray-100 pb-6 pt-6">
             <div>
               <span className="text-orange-600 font-bold uppercase tracking-wider text-xs">
                 Nossa Coleção
@@ -63,29 +86,27 @@ export function FeaturedCatalog() {
             </Link>
           </div>
 
-          {/* Transição Suave entre Skeleton e Conteúdo Real */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {products.map((product) => (
-                  <motion.div 
-                    key={product.id} 
-                    className="h-full"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <ProductCard
-                      data={product}
-                      onClick={() => openModal(product)}
-                    />
-                  </motion.div>
-                ))}
-              </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {products.map((product) => (
+                <motion.div 
+                  key={product.id} 
+                  className="h-full"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ProductCard
+                    data={product}
+                    onClick={() => openModal(product)}
+                  />
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>

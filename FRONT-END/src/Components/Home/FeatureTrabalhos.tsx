@@ -8,6 +8,9 @@ import "photoswipe/dist/photoswipe.css";
 import { motion } from "framer-motion";
 import { supabase } from "@/lib/supabase";
 
+// Importação do Skeleton
+import { TrabalhosSkeleton } from "@/Components/Skeletons/HomeSkeletons";
+
 // Interfaces de Tipagem
 interface SupabaseProject {
   id: number;
@@ -27,40 +30,59 @@ interface GalleryProject {
   height: number;
 }
 
-
 export default function FeaturedWorks() {
   const [projects, setProjects] = useState<GalleryProject[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchFeaturedProjects() {
-      const { data, error } = await supabase
-        .from('projects')
-        .select('*')
-        .order('id', { ascending: false })
-        .limit(6);
+      try {
+        const { data, error } = await supabase
+          .from('projects')
+          .select('*')
+          .order('id', { ascending: false })
+          .limit(6);
 
-      if (!error && data) {
-        const formattedData: GalleryProject[] = data.map((item: SupabaseProject) => ({
-          id: item.id,
-          category: item.category,
-          title: item.title,
-          src: item.image_url,
-          width: item.width || 1000,
-          height: item.height || 1200
-        }));
-        setProjects(formattedData);
+        if (!error && data) {
+          const formattedData: GalleryProject[] = data.map((item: SupabaseProject) => ({
+            id: item.id,
+            category: item.category,
+            title: item.title,
+            src: item.image_url,
+            width: item.width || 1000,
+            height: item.height || 1200
+          }));
+          setProjects(formattedData);
+        }
+      } catch (err) {
+        console.error("Erro ao carregar projetos:", err);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     }
     fetchFeaturedProjects();
   }, []);
+
+  // --- LOADING / SKELETON ---
+  if (isLoading) {
+    return (
+      <section className="w-full py-20 bg-white dark:bg-transparent">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <div className="text-center mb-12">
+            <div className="h-4 w-32 bg-gray-200 animate-pulse rounded-full mx-auto mb-4" />
+            <div className="h-10 w-64 bg-gray-200 animate-pulse rounded-lg mx-auto" />
+          </div>
+          <TrabalhosSkeleton />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="w-full py-20 bg-white dark:bg-transparent">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         
-        {/* CABEÇALHO (Sempre visível para evitar pulo de layout) */}
+        {/* CABEÇALHO */}
         <div className="text-center mb-12">
           <span className="block text-[#F9A825] font-bold tracking-widest uppercase text-sm mb-2">
             Nosso Portfólio
@@ -68,71 +90,74 @@ export default function FeaturedWorks() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Projetos em Destaque
           </h2>
-          <p className="text-gray-500 dark:text-black-40 max-w-2xl mx-auto">
+          <p className="text-gray-500 max-w-2xl mx-auto">
             Confira algumas das nossas execuções recentes em mármores e granitos de alto padrão.
           </p>
         </div>
 
-        {/* ÁREA DE CONTEÚDO */}
-        <div className="min-h-[600px]">
-
-            <motion.div 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              transition={{ duration: 0.6 }}
-            >
-              <Gallery>
-                <div className="columns-1 md:columns-2 lg:columns-3 gap-6">
-                  {projects.map((project) => {
-                    const aspectRatio = project.width / project.height;
-                    return (
-                      <div
-                        key={project.id}
-                        className="break-inside-avoid mb-6 group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-gray-100"
-                      >
-                        <Item
-                          original={project.src}
-                          thumbnail={project.src}
-                          width={project.width}
-                          height={project.height}
-                          caption={project.title}
+        {/* ÁREA MASONRY GRID */}
+        <motion.div 
+          initial={{ opacity: 0 }} 
+          animate={{ opacity: 1 }} 
+          transition={{ duration: 0.6 }}
+        >
+          <Gallery>
+            {/* O segredo do Masonry está nestas classes de columns */}
+            <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+              {projects.map((project) => {
+                const aspectRatio = project.width / project.height;
+                
+                return (
+                  <div
+                    key={project.id}
+                    className="break-inside-avoid group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-gray-100"
+                  >
+                    <Item
+                      original={project.src}
+                      thumbnail={project.src}
+                      width={project.width}
+                      height={project.height}
+                      caption={project.title}
+                    >
+                      {({ ref, open }) => (
+                        <div
+                          className="cursor-zoom-in relative w-full"
+                          onClick={open}
+                          style={{ 
+                            aspectRatio: `${aspectRatio}`,
+                            position: 'relative' 
+                          }}
                         >
-                          {({ ref, open }) => (
-                            <div
-                              className="cursor-zoom-in relative w-full overflow-hidden"
-                              onClick={open}
-                              style={{ aspectRatio: `${aspectRatio}` }}
-                            >
-                              <Image
-                                ref={ref as React.Ref<HTMLImageElement>}
-                                src={project.src}
-                                alt={project.title}
-                                fill
-                                className="object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                <span className="text-[#F9A825] text-xs font-bold uppercase tracking-wider mb-1">
-                                  {project.category}
-                                </span>
-                                <h3 className="text-white font-bold text-lg leading-tight">
-                                  {project.title}
-                                </h3>
-                              </div>
-                            </div>
-                          )}
-                        </Item>
-                      </div>
-                    );
-                  })}
-                </div>
-              </Gallery>
-            </motion.div>
-
-        </div>
+                          <Image
+                            ref={ref as React.Ref<HTMLImageElement>}
+                            src={project.src}
+                            alt={project.title}
+                            fill
+                            className="object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          />
+                          
+                          {/* Overlay com informações */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <span className="text-[#F9A825] text-xs font-bold uppercase tracking-wider mb-1">
+                              {project.category}
+                            </span>
+                            <h3 className="text-white font-bold text-lg leading-tight">
+                              {project.title}
+                            </h3>
+                          </div>
+                        </div>
+                      )}
+                    </Item>
+                  </div>
+                );
+              })}
+            </div>
+          </Gallery>
+        </motion.div>
 
         {/* BOTÃO VER TODOS */}
-        <div className="mt-10 text-center">
+        <div className="mt-12 text-center">
           <Link
             href="/trabalhos"
             className="inline-flex items-center gap-3 px-8 py-4 bg-gray-900 text-white font-bold rounded-full hover:bg-[#F9A825] transition-all duration-300 shadow-lg hover:shadow-[#F9A825]/30 group"

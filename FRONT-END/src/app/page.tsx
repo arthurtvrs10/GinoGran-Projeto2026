@@ -4,7 +4,6 @@ import { FeaturedCatalog } from "@/Components/Home/FeatureCatalog";
 import FeaturedWorks from "@/Components/Home/FeatureTrabalhos";
 import FeaturesBar from "@/Components/Home/FeaturesBar";
 import Slider from "@/Components/Home/Slider";
-import { BlogSkeleton, CatalogSkeleton, TestimonialSkeleton, TrabalhosSkeleton } from "@/Components/Skeletons/HomeSkeletons";
 import TestimonialSection from "@/Components/ui/TestimonialSection";
 import { Suspense } from "react";
 
@@ -28,24 +27,11 @@ export default function Home() {
     <main className="w-full">
       <Slider images={minhasFotos} />
       <FeaturesBar />
-
-      <Suspense fallback={<CatalogSkeleton />}>
-        <FeaturedCatalog />
-      </Suspense>
-
+      <FeaturedCatalog />
       <CtaSection />
-
-      <Suspense fallback={<TrabalhosSkeleton />}>
-        <FeaturedWorks />
-      </Suspense>
-      
-      <Suspense fallback={<TestimonialSkeleton />}>
-        <TestimonialSection />
-      </Suspense>
-      
-      <Suspense fallback={<BlogSkeleton />}>
-        <BlogSection />
-      </Suspense>
+      <FeaturedWorks />
+      <TestimonialSection />
+      <BlogSection />
     </main>
   );
 }
