@@ -76,6 +76,14 @@
   --color-warning: var(--Warning);
   --color-success: var(--Success);
   --color-overlay: var(--Overlay);
+
+  /* ... suas outras variáveis ... */
+  --animate-infinite-scroll: scroll 40s linear infinite;
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
 }
 
 @media (prefers-color-scheme: dark) {

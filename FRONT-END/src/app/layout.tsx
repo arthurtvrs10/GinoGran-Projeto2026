@@ -47,6 +47,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className="antialiased">
+        
         <Header />
         {children}
         <WhatsAppButton phoneNumber="5561985921488" />

@@ -67,7 +67,7 @@ export default function GinogranPremiumCarousel() {
   // --- ESTADO DE CARREGAMENTO (SKELETON) ---
   if (isLoading) {
     return (
-      <section className="py-10 bg-marble dark:bg-black-100 border-y border-black-20 dark:border-black-80 select-none overflow-hidden">
+      <section className="py-10 bg-darkgray dark:bg-black-100 border-y border-black-20 dark:border-black-80 select-none overflow-hidden">
         <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 items-center">
           {/* Título Lateral Skeleton */}
           <div className="md:col-span-1 border-l-4 border-primary/30 pl-4 space-y-2">
@@ -88,7 +88,7 @@ export default function GinogranPremiumCarousel() {
 
   return (
     <section 
-      className="py-10 bg-marble dark:bg-black-100 border-y border-black-20 dark:border-black-80 select-none overflow-hidden transition-colors duration-500"
+      className="py-10 bg-darkgray border-y border-black-20 dark:border-black-80 select-none overflow-hidden transition-colors duration-500"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -120,7 +120,7 @@ export default function GinogranPremiumCarousel() {
                   <img 
                     src={testimonials[index].avatar || '/logo.png'} 
                     alt={testimonials[index].name}
-                    className="w-16 h-16 rounded-full border-2 border-primary grayscale group-hover:grayscale-0 transition-all duration-700 shadow-md object-cover"
+                    className="w-16 h-16 rounded-full border-2 border-primary group-hover:grayscale-0 transition-all duration-700 shadow-md object-cover"
                   />
                 </div>
                 

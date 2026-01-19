@@ -78,21 +78,10 @@ export default function Header() {
       {/* 2. HEADER */}
       <header className="w-full h-[71px] bg-slate-50 border-b border-gray-200 px-4 md:px-22 py-4">
         <div className="w-full max-w-full flex items-center justify-between ">
-          <a href="/ " className="flex items-center gap-3" onClick={closeMenu}>
-            <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center shadow-sm">
-              <span className="text-[#F9A825] font-bold text-lg tracking-tighter">
-                GG
-              </span>
-            </div>
-
-            <div className="flex flex-col justify-center">
-              <h1 className="text-gray-900 font-bold text-sm leading-tight tracking-wide">
-                GINOGRAN
-              </h1>
-              <span className="text-gray-500 text-[10px] uppercase tracking-wider leading-none">
-                Slogan Aqui
-              </span>
-            </div>
+          <a href="/ " className="flex items-center " onClick={closeMenu}>
+              <h1 className="text-darkgray font-extrabold text-2xl leading-tight tracking-wide">
+                GINO<span className="text-[#F9A825]">GRAN</span>
+             </h1>
           </a>
 
           <nav className="hidden md:flex items-center gap-8">

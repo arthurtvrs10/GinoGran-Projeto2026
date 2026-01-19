@@ -3,6 +3,8 @@ import CtaSection from "@/Components/Home/CtaSection";
 import { FeaturedCatalog } from "@/Components/Home/FeatureCatalog";
 import FeaturedWorks from "@/Components/Home/FeatureTrabalhos";
 import FeaturesBar from "@/Components/Home/FeaturesBar";
+import InfiniteMarquee from "@/Components/Home/InfiniteMarquee";
+
 import Slider from "@/Components/Home/Slider";
 import TestimonialSection from "@/Components/ui/TestimonialSection";
 import { Suspense } from "react";
@@ -26,7 +28,7 @@ export default function Home() {
   return (
     <main className="w-full">
       <Slider images={minhasFotos} />
-      <FeaturesBar />
+      <InfiniteMarquee />
       <FeaturedCatalog />
       <CtaSection />
       <FeaturedWorks />
