@@ -36,11 +36,11 @@ export function FeaturedCatalog() {
 
   return (
     <>
-      <section className="w-full  md:py-5 bg-white overflow-hidden">
+      <section className="w-full py-5 bg-white overflow-hidden">
         <div className="max-w-full mx-auto px-4 md:px-22">
           
           {/* --- CABEÇALHO ELEGANTE --- */}
-          <div className="flex flex-row justify-between items-end border-t border-gray-100/50 pb-8">
+          <div className="flex flex-row justify-between items-end border-t border-gray-100/50 pt-0 md:pt-0 pb-8">
             <div>
               <span className="text-primary font-bold uppercase tracking-widest text-xs">
                 Nossa Coleção
