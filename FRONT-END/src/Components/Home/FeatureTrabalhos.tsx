@@ -8,10 +8,9 @@ import "photoswipe/dist/photoswipe.css";
 import { motion } from "framer-motion";
 import { supabase } from "@/lib/supabase";
 
-// Importação do Skeleton
+// Importação do Skeleton Masonry
 import { TrabalhosSkeleton } from "@/Components/Skeletons/HomeSkeletons";
 
-// Interfaces de Tipagem
 interface SupabaseProject {
   id: number;
   category: string;
@@ -63,7 +62,7 @@ export default function FeaturedWorks() {
     fetchFeaturedProjects();
   }, []);
 
-  // --- LOADING / SKELETON ---
+  // --- LOADING / SKELETON MASONRY ---
   if (isLoading) {
     return (
       <section className="w-full py-20 bg-white dark:bg-transparent">
@@ -95,18 +94,16 @@ export default function FeaturedWorks() {
           </p>
         </div>
 
-        {/* ÁREA MASONRY GRID */}
+        {/* ÁREA MASONRY GRID REAL */}
         <motion.div 
           initial={{ opacity: 0 }} 
           animate={{ opacity: 1 }} 
           transition={{ duration: 0.6 }}
         >
           <Gallery>
-            {/* O segredo do Masonry está nestas classes de columns */}
             <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
               {projects.map((project) => {
                 const aspectRatio = project.width / project.height;
-                
                 return (
                   <div
                     key={project.id}
@@ -123,10 +120,7 @@ export default function FeaturedWorks() {
                         <div
                           className="cursor-zoom-in relative w-full"
                           onClick={open}
-                          style={{ 
-                            aspectRatio: `${aspectRatio}`,
-                            position: 'relative' 
-                          }}
+                          style={{ aspectRatio: `${aspectRatio}`, position: 'relative' }}
                         >
                           <Image
                             ref={ref as React.Ref<HTMLImageElement>}
@@ -136,8 +130,6 @@ export default function FeaturedWorks() {
                             className="object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           />
-                          
-                          {/* Overlay com informações */}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                             <span className="text-[#F9A825] text-xs font-bold uppercase tracking-wider mb-1">
                               {project.category}
@@ -160,7 +152,7 @@ export default function FeaturedWorks() {
         <div className="mt-12 text-center">
           <Link
             href="/trabalhos"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-gray-900 text-white font-bold rounded-full hover:bg-[#F9A825] transition-all duration-300 shadow-lg hover:shadow-[#F9A825]/30 group"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-gray-900 text-white font-bold rounded-full hover:bg-[#F9A825] transition-all duration-300 shadow-lg group"
           >
             Ver Galeria Completa
             <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

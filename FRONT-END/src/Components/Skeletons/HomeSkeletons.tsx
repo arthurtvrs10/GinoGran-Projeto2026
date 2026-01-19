@@ -14,7 +14,7 @@ export const CatalogSkeleton = () => (
 
 // --- SKELETON MASONRY (IGUAL AO REAL) ---
 export const TrabalhosSkeleton = () => {
-  // Definimos alturas variadas para simular o efeito das fotos reais
+  // Alturas variadas para simular fotos reais no mosaico
   const heights = [
     "h-[400px]", 
     "h-[300px]", 
