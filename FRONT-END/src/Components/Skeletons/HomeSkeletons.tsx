@@ -31,7 +31,7 @@ export const CatalogSkeleton = () => (
             "
           >
             {/* Imagem do Produto (Aspect Ratio) */}
-            <div className="w-full aspect-[3/4] bg-gray-200 dark:bg-zinc-800 animate-pulse rounded-xl" />
+            <div className="w-full aspect-[4/4] bg-gray-200 dark:bg-zinc-800 animate-pulse rounded-xl" />
             
             {/* Infos do Produto */}
             <div className="space-y-2 mt-1">
