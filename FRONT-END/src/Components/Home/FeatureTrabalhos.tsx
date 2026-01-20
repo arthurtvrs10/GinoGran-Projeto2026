@@ -77,7 +77,7 @@ export default function FeaturedWorks() {
   }
 
   return (
-    <section className="w-full py-10 md:py-20 bg-white dark:bg-transparent overflow-hidden">
+    <section className="w-full py-10 md:py-8 bg-white dark:bg-transparent overflow-hidden">
       <div className="max-w-full mx-auto px-4 md:px-22">
         
         {/* CABEÇALHO */}

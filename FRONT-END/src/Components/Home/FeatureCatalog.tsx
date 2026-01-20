@@ -36,7 +36,7 @@ export function FeaturedCatalog() {
 
   return (
     <>
-      <section className="w-full py-5 bg-white overflow-hidden">
+      <section className="w-full py-8 bg-white overflow-hidden">
         <div className="max-w-full mx-auto px-4 md:px-22">
           
           {/* --- CABEÇALHO ELEGANTE --- */}

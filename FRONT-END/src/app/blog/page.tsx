@@ -189,28 +189,7 @@ export default function BlogListingPage() {
           )}
         </section>
         <CtaSection />
-        {/* --- 4. NEWSLETTER (SEU DESIGN ORIGINAL) --- */}
-        <section className="mt-24 relative rounded-3xl overflow-hidden bg-gray-900 text-white py-16 px-6 text-center">
-          <div className="relative z-10 max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold mb-4">
-              Não perca nenhuma novidade
-            </h2>
-            <p className="text-gray-300 mb-8">
-              Receba dicas de manutenção e tendências de design com pedras naturais diretamente no seu e-mail.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <input
-                type="email"
-                placeholder="Seu melhor e-mail"
-                className="px-6 py-3 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#F9A825] w-full sm:w-80"
-              />
-              <button className="px-8 py-3 bg-[#F9A825] text-white font-bold rounded-full hover:bg-orange-600 transition-colors">
-                Inscrever-se
-              </button>
-            </div>
-          </div>
-          <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-        </section>
+        
       </main>
     </div>
   );

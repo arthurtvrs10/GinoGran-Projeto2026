@@ -94,7 +94,7 @@ export default function BlogSection() {
       <div className="max-w-full mx-auto">
         
         {/* Cabeçalho */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-8 border-t border-gray-100 pt-6">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-8 ">
           <div>
             <span className="text-orange-600 font-bold uppercase tracking-wider text-xs">
               Nossa Coleção

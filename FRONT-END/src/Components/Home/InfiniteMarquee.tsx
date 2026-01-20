@@ -15,7 +15,7 @@ export default function InfiniteMarquee() {
   return (
     // 1. Alterado bg-slate-800 para bg-darkgray (Sua paleta)
     // 2. Adicionado 'select-none' para o usuário não selecionar o texto sem querer enquanto rola
-    <div className="relative flex w-full overflow-hidden bg-darkgray py-4 border-y border-white/5 select-none">
+    <div className="relative flex w-full overflow-hidden bg-black-80 py-4 border-y border-white/5 select-none">
       
       {/* 3. EFEITO FADE (Esquerda): Suaviza a entrada dos textos */}
       <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-darkgray to-transparent" />

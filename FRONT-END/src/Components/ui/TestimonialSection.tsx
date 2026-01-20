@@ -98,7 +98,7 @@ export default function GinogranPremiumCarousel() {
 
   return (
     <section 
-      className="py-10 bg-darkgray border-y border-black-20 dark:border-black-80 select-none overflow-hidden transition-colors duration-500"
+      className="py-15 bg-black-80 border-y border-black-20 dark:border-black-80 select-none overflow-hidden transition-colors duration-500"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Cta() {
   return (
     <div className="bg-gray-900 py-10 text-center">
@@ -14,12 +16,12 @@ export default function Cta() {
           Ver Nossos Produtos
         </button>
         {/* Botão Secundário Outline */}
-        <a
+        <Link
           href="https://wa.me/61985921488"
           className="px-8 py-3 bg-transparent text-white border-2 border-black-30 rounded-full font-bold hover:bg-black-20 transition-colors"
         >
           Fale Conosco
-        </a>
+        </Link>
       </div>
     </div>
   );
