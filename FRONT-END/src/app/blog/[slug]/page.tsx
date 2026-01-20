@@ -23,9 +23,7 @@ interface Props {
 }
 
 // --- 1. GERAÇÃO DE METADATA (CORRIGIDO) ---
-export async function generateMetadata(
-  { params }: Props
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Await é obrigatório aqui no Next 15+
   const { slug } = await params;
 
@@ -56,7 +54,7 @@ export async function generateMetadata(
 export default async function BlogPost({ params }: Props) {
   // Await é obrigatório aqui também
   const { slug } = await params;
-  
+
   // Busca o Post Atual
   const { data: post } = await supabase
     .from("posts")
@@ -66,7 +64,7 @@ export default async function BlogPost({ params }: Props) {
 
   // Se não achar, manda para página 404
   if (!post) {
-    notFound(); 
+    notFound();
   }
 
   // Busca posts recentes (SideBar)
@@ -125,25 +123,23 @@ export default async function BlogPost({ params }: Props) {
       {/* --- CONTEÚDO PRINCIPAL --- */}
       <main className="w-full py-12 md:py-16">
         <div className="max-w-7xl px-4 md:px-8 mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
-          
           <article className="lg:col-span-8">
             <div className="prose prose-lg md:prose-xl max-w-none text-gray-600 prose-headings:text-gray-900 prose-headings:font-bold prose-a:text-orange-400 prose-a:no-underline hover:prose-a:underline prose-img:rounded-2xl prose-img:shadow-lg">
-              
               {post.excerpt && (
                 <p className="lead text-xl md:text-2xl text-gray-500 mb-8 font-light italic border-l-4 border-orange-400 pl-4">
                   {post.excerpt}
                 </p>
               )}
 
-              <div className="whitespace-pre-line">
-                 {post.content}
-              </div>
+              <div className="whitespace-pre-line">{post.content}</div>
 
               <hr className="my-12 border-gray-100" />
-              
+
               <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                 <div className="flex gap-2">
-                  <span className="px-4 py-2 bg-gray-50 rounded-lg text-sm text-gray-600">#Mármore</span>
+                  <span className="px-4 py-2 bg-gray-50 rounded-lg text-sm text-gray-600">
+                    #Mármore
+                  </span>
                 </div>
               </div>
             </div>
@@ -153,11 +149,16 @@ export default async function BlogPost({ params }: Props) {
           <aside className="lg:col-span-4">
             <div className="sticky top-10 space-y-12">
               <div className="bg-gray-50 p-8 rounded-3xl border border-gray-100">
-                <h3 className="text-xl font-bold mb-4 text-gray-900">Sobre a Ginogran</h3>
+                <h3 className="text-xl font-bold mb-4 text-gray-900">
+                  Sobre a Ginogran
+                </h3>
                 <p className="text-gray-600 mb-6 leading-relaxed text-sm">
                   Especialistas em mármores e granitos de alto padrão.
                 </p>
-                <Link href="/SobreNos" className="text-orange-400 font-bold hover:underline text-sm">
+                <Link
+                  href="/SobreNos"
+                  className="text-orange-400 font-bold hover:underline text-sm"
+                >
                   Conheça nossa história →
                 </Link>
               </div>
@@ -167,26 +168,31 @@ export default async function BlogPost({ params }: Props) {
                   Últimas Novidades
                 </h3>
                 <div className="flex flex-col gap-6">
-                  {recentPosts && recentPosts.map((item: Post) => (
-                    <Link key={item.slug} href={`/blog/${item.slug}`} className="group flex gap-4 items-start">
-                      <div className="relative w-20 h-20 shrink-0 rounded-xl overflow-hidden bg-gray-200">
-                        <Image
-                          src={item.image_url}
-                          alt={item.title}
-                          fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-300"
-                        />
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-bold text-gray-900 text-sm leading-snug group-hover:text-orange-400 transition-colors line-clamp-2">
-                          {item.title}
-                        </h4>
-                        <p className="text-xs text-gray-400 mt-2">
-                          {item.date}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
+                  {recentPosts &&
+                    recentPosts.map((item: Post) => (
+                      <Link
+                        key={item.slug}
+                        href={`/blog/${item.slug}`}
+                        className="group flex gap-4 items-start"
+                      >
+                        <div className="relative w-20 h-20 shrink-0 rounded-xl overflow-hidden bg-gray-200">
+                          <Image
+                            src={item.image_url}
+                            alt={item.title}
+                            fill
+                            className="object-cover group-hover:scale-110 transition-transform duration-300"
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-bold text-gray-900 text-sm leading-snug group-hover:text-orange-400 transition-colors line-clamp-2">
+                            {item.title}
+                          </h4>
+                          <p className="text-xs text-gray-400 mt-2">
+                            {item.date}
+                          </p>
+                        </div>
+                      </Link>
+                    ))}
                 </div>
               </div>
             </div>

@@ -46,7 +46,8 @@ export default function BlogListingPage() {
   const regularPosts = posts.slice(1);
 
   // Loading state simples para não piscar a tela
-  if (isLoading) return <div className="py-20 text-center">Carregando novidades...</div>;
+  if (isLoading)
+    return <div className="py-20 text-center">Carregando novidades...</div>;
 
   return (
     <div className="w-full bg-white min-h-screen pb-20">
@@ -69,13 +70,13 @@ export default function BlogListingPage() {
             Blog Ginogran
           </h1>
           <p className="text-gray-200 max-w-2xl mx-auto text-lg font-light leading-relaxed">
-            Dicas de arquitetura, manutenção de pedras e inspirações para o seu projeto.
+            Dicas de arquitetura, manutenção de pedras e inspirações para o seu
+            projeto.
           </p>
         </div>
       </section>
 
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-16">
-        
         {/* --- 2. POST EM DESTAQUE (Lógica conectada ao Supabase) --- */}
         {featuredPost && (
           <section className="mb-20">
@@ -170,8 +171,18 @@ export default function BlogListingPage() {
 
                   <div className="mt-auto flex items-center text-[#F9A825] text-sm font-bold gap-2">
                     Ler mais
-                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    <svg
+                      className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      ></path>
                     </svg>
                   </div>
                 </div>
@@ -189,7 +200,6 @@ export default function BlogListingPage() {
           )}
         </section>
         <CtaSection />
-        
       </main>
     </div>
   );

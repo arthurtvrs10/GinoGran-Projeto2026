@@ -23,8 +23,16 @@ const legalLinks = [
 ];
 
 const socialLinks: { href: string; icon: IconType; ariaLabel: string }[] = [
-  { href: "https://www.facebook.com/profile.php?id=61581233687814", icon: FaFacebookF, ariaLabel: "Facebook" },
-  { href: "https://www.instagram.com/ginogran.marmores/", icon: FaInstagram, ariaLabel: "Instagram" },
+  {
+    href: "https://www.facebook.com/profile.php?id=61581233687814",
+    icon: FaFacebookF,
+    ariaLabel: "Facebook",
+  },
+  {
+    href: "https://www.instagram.com/ginogran.marmores/",
+    icon: FaInstagram,
+    ariaLabel: "Instagram",
+  },
   {
     href: "https://wa.me/5561985921488",
     icon: FaWhatsapp,
@@ -104,7 +112,8 @@ const Footer = () => {
 
       <div className="flex flex-col-reverse items-center justify-between gap-6 sm:flex-row">
         <p className="text-center text-sm text-gray-500 sm:text-left">
-          © {new Date().getFullYear()} Direitos reservados GinoGran | Desenvolvido por{" "}
+          © {new Date().getFullYear()} Direitos reservados GinoGran |
+          Desenvolvido por{" "}
           <a
             href="https://www.instagram.com/tavares_devv/"
             target="_blank"
@@ -114,7 +123,7 @@ const Footer = () => {
             Tavares
           </a>
         </p>
-        
+
         <div className="flex items-center gap-6">
           {socialLinks.map((social) => (
             <a

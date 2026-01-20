@@ -1,5 +1,5 @@
 export default function MapGinogran() {
-  return(
+  return (
     <div className="w-full h-64 bg-gray-200 rounded-2xl overflow-hidden border border-gray-100 shadow-inner relative">
       <iframe
         src="https://maps.google.com/maps?q=-15.9238,-48.1127&hl=pt-br&z=15&output=embed"

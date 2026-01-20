@@ -12,22 +12,17 @@ import { Suspense } from "react";
 // --- OPEN GRAPH ESPECÍFICO DA HOME ---
 export const metadata = {
   title: "Início", // Vai ficar: Início | Ginogran
-  description: "Descubra a elegância das pedras naturais. Mármores e Granitos selecionados para o seu projeto.",
+  description:
+    "Descubra a elegância das pedras naturais. Mármores e Granitos selecionados para o seu projeto.",
   openGraph: {
     title: "Ginogran - Excelência em Pedras Naturais",
-  }
+  },
 };
 
 export default function Home() {
-  const minhasFotos = [
-    "https://gxqcjmjfipmxvdmflabu.supabase.co/storage/v1/object/public/Background/Ginogran.png",
-    "https://placehold.co/600x400/purple/white",
-    "https://placehold.co/600x400/blue/white",
-  ];
-
   return (
     <main className="w-full">
-      <Slider images={minhasFotos} />
+      <Slider />
       <InfiniteMarquee />
       <FeaturedCatalog />
       <CtaSection />

@@ -79,7 +79,6 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
           </div>
 
           <div className="flex items-center justify-between mt-auto pt-6 border-t border-gray-100">
-
             <a
               href={`https://wa.me/61985921488?text=Tenho interesse no ${product.title}`}
               target="_blank"

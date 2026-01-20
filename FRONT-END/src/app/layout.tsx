@@ -17,23 +17,24 @@ import WhatsAppButton from "@/Components/ui/WhatsAppButton";
 // --- CONFIGURAÇÃO OPEN GRAPH GLOBAL ---
 export const metadata = {
   // Use a URL real do seu site quando publicar (ex: https://ginogran.com.br)
-  metadataBase: new URL('http://localhost:3000'), 
+  metadataBase: new URL("http://localhost:3000"),
   title: {
     default: "Ginogran - Mármores e Granitos",
-    template: "%s | Ginogran" // O %s será substituído pelo título da página interna
+    template: "%s | Ginogran", // O %s será substituído pelo título da página interna
   },
-  description: "Especialistas em mármores, granitos e pedras naturais de alto padrão. Transformamos pedras em obras de arte.",
+  description:
+    "Especialistas em mármores, granitos e pedras naturais de alto padrão. Transformamos pedras em obras de arte.",
   openGraph: {
-    type: 'website',
-    locale: 'pt_BR',
-    url: 'https://ginogran.com.br',
-    siteName: 'Ginogran',
+    type: "website",
+    locale: "pt_BR",
+    url: "https://ginogran.com.br",
+    siteName: "Ginogran",
     images: [
       {
-        url: '/logo.png', // Imagem padrão (do seu public/)
+        url: "/logo.png", // Imagem padrão (do seu public/)
         width: 1200,
         height: 630,
-        alt: 'Ginogran Mármores e Granitos',
+        alt: "Ginogran Mármores e Granitos",
       },
     ],
   },
@@ -47,7 +48,6 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className="antialiased">
-        
         <Header />
         {children}
         <WhatsAppButton phoneNumber="5561985921488" />

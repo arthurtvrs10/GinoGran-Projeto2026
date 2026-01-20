@@ -25,8 +25,6 @@ export default function SobreNos() {
 
       {/* --- CALL TO ACTION (CTA) --- */}
       <Cta />
-
-      
     </div>
   );
 }

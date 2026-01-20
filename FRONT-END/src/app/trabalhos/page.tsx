@@ -34,23 +34,25 @@ export default function TrabalhosPage() {
   useEffect(() => {
     async function fetchProjects() {
       const { data, error } = await supabase
-        .from('projects')
-        .select('*')
-        .order('id', { ascending: false }); // Ordem decrescente para mostrar os mais novos primeiro
+        .from("projects")
+        .select("*")
+        .order("id", { ascending: false }); // Ordem decrescente para mostrar os mais novos primeiro
 
       if (error) {
         console.error("Erro ao buscar projetos:", error);
       }
 
       if (data) {
-        const formattedData: GalleryProject[] = data.map((item: SupabaseProject) => ({
-          id: item.id,
-          category: item.category,
-          title: item.title,
-          src: item.image_url,
-          width: item.width || 1000, // Fallback de segurança
-          height: item.height || 1200 // Fallback de segurança
-        }));
+        const formattedData: GalleryProject[] = data.map(
+          (item: SupabaseProject) => ({
+            id: item.id,
+            category: item.category,
+            title: item.title,
+            src: item.image_url,
+            width: item.width || 1000, // Fallback de segurança
+            height: item.height || 1200, // Fallback de segurança
+          }),
+        );
 
         setProjects(formattedData);
       }
@@ -99,9 +101,12 @@ export default function TrabalhosPage() {
           <span className="block text-[#F9A825] font-semibold tracking-widest uppercase mb-4 text-sm md:text-base">
             Portfólio Exclusivo
           </span>
-          <h1 className="text-4xl md:text-6xl text-white mb-6 font-bold">Nossos Trabalhos</h1>
+          <h1 className="text-4xl md:text-6xl text-white mb-6 font-bold">
+            Nossos Trabalhos
+          </h1>
           <p className="text-gray-200 max-w-2xl mx-auto text-lg font-light leading-relaxed mb-8">
-            Transformamos a força da natureza em sofisticação para o seu ambiente.
+            Transformamos a força da natureza em sofisticação para o seu
+            ambiente.
           </p>
 
           {!isLoading && (
@@ -111,7 +116,8 @@ export default function TrabalhosPage() {
                   key={cat}
                   onClick={() => handleCategoryChange(cat)}
                   className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 border backdrop-blur-sm
-                    ${filter === cat
+                    ${
+                      filter === cat
                         ? "bg-[#F9A825] text-white border-[#F9A825] shadow-lg scale-105"
                         : "bg-white/10 text-white border-white/30 hover:bg-white hover:text-gray-900"
                     }`}
@@ -152,7 +158,9 @@ export default function TrabalhosPage() {
                         className="cursor-zoom-in relative w-full overflow-hidden"
                         onClick={open}
                         /* aspectRatio evita 'pulos' de layout no mobile */
-                        style={{ aspectRatio: `${project.width} / ${project.height}` }}
+                        style={{
+                          aspectRatio: `${project.width} / ${project.height}`,
+                        }}
                       >
                         <Image
                           ref={ref as React.Ref<HTMLImageElement>}
@@ -189,8 +197,18 @@ export default function TrabalhosPage() {
               className="group flex items-center gap-2 px-8 py-3 bg-white text-gray-900 font-bold rounded-full border-2 border-gray-200 hover:border-[#F9A825] hover:text-[#F9A825] transition-all duration-300 shadow-sm hover:shadow-md"
             >
               <span>Carregar mais projetos</span>
-              <svg className="w-4 h-4 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              <svg
+                className="w-4 h-4 group-hover:translate-y-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
           </div>

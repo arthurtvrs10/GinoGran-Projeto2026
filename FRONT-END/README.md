@@ -16,11 +16,11 @@ O site foi construído com foco em performance e experiência do usuário (UX), 
 
 ## 🛠️ Tecnologias Utilizadas
 
-* **Framework:** [Next.js 16 (App Router)](https://nextjs.org)
-* **Linguagem:** [TypeScript](https://www.typescriptlang.org/)
-* **Estilização:** [Tailwind CSS 4](https://tailwindcss.com/)
-* **Backend/Database:** [Supabase](https://supabase.com/)
-* **Ícones:** [Lucide React](https://lucide.dev/) e [React Icons](https://react-icons.github.io/react-icons/)
+- **Framework:** [Next.js 16 (App Router)](https://nextjs.org)
+- **Linguagem:** [TypeScript](https://www.typescriptlang.org/)
+- **Estilização:** [Tailwind CSS 4](https://tailwindcss.com/)
+- **Backend/Database:** [Supabase](https://supabase.com/)
+- **Ícones:** [Lucide React](https://lucide.dev/) e [React Icons](https://react-icons.github.io/react-icons/)
 
 ## 📂 Estrutura de Pastas
 
@@ -40,25 +40,25 @@ FRONT-END/
 Certifique-se de ter o **Node.js** instalado em sua máquina.
 
 1. **Clone o repositório:**
+
 ```bash
 git clone https://github.com/arthurtvrs10/ginogran-projeto2026.git
 
 ```
 
-
 2. **Instale as dependências:**
+
 ```bash
 npm install
 
 ```
 
-
 3. **Inicie o servidor de desenvolvimento:**
+
 ```bash
 npm run dev
 
 ```
-
 
 Acesse `http://localhost:3000` no seu navegador.
 
@@ -66,15 +66,15 @@ Acesse `http://localhost:3000` no seu navegador.
 
 Para manter a organização do projeto, utilizamos o seguinte padrão de prefixos e emojis para commits:
 
-| Prefixo | Emoji | Significado |
-| --- | --- | --- |
-| `feat:` | ✨ | Nova funcionalidade |
-| `fix:` | 🐛 | Correção de bug |
-| `docs:` | 📚 | Documentação |
-| `style:` | 💎 | Estilo/Formatação |
-| `refactor:` | ♻️ | Refatoração |
-| `perf:` | 🚀 | Performance |
-| `chore:` | wrench | Configurações |
+| Prefixo     | Emoji  | Significado         |
+| ----------- | ------ | ------------------- |
+| `feat:`     | ✨     | Nova funcionalidade |
+| `fix:`      | 🐛     | Correção de bug     |
+| `docs:`     | 📚     | Documentação        |
+| `style:`    | 💎     | Estilo/Formatação   |
+| `refactor:` | ♻️     | Refatoração         |
+| `perf:`     | 🚀     | Performance         |
+| `chore:`    | wrench | Configurações       |
 
 ---
 

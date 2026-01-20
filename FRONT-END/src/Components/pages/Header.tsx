@@ -70,7 +70,6 @@ export default function Header() {
             >
               <FaPinterest className="w-4 h-4" />
             </Link>
-
           </div>
         </div>
       </header>
@@ -79,9 +78,9 @@ export default function Header() {
       <header className="w-full h-[71px] bg-slate-50 border-b border-gray-200 px-4 md:px-22 py-4">
         <div className="w-full max-w-full flex items-center justify-between ">
           <a href="/ " className="flex items-center " onClick={closeMenu}>
-              <h1 className="text-darkgray font-extrabold text-2xl leading-tight tracking-wide">
-                GINO<span className="text-[#F9A825]">GRAN</span>
-             </h1>
+            <h1 className="text-darkgray font-extrabold text-2xl leading-tight tracking-wide">
+              GINO<span className="text-[#F9A825]">GRAN</span>
+            </h1>
           </a>
 
           <nav className="hidden md:flex items-center gap-8">
@@ -98,7 +97,7 @@ export default function Header() {
             >
               Trabalhos
             </a>
-            
+
             <a
               href="/Catalogo"
               className="flex items-center gap-1 cursor-pointer group text-gray-700 hover:text-black transition-colors"
@@ -116,7 +115,10 @@ export default function Header() {
 
           {/* Botão do menu mobile */}
 
-          <button className="md:hidden text-gray-700" onClick={() => setIsOpen(!isOpen)}>
+          <button
+            className="md:hidden text-gray-700"
+            onClick={() => setIsOpen(!isOpen)}
+          >
             <span className="block w-6 h-0.5 bg-current mb-1"></span>
             <span className="block w-6 h-0.5 bg-current mb-1"></span>
             <span className="block w-6 h-0.5 bg-current"></span>
@@ -125,18 +127,32 @@ export default function Header() {
       </header>
 
       {/* 3. MENU MOBILE OVERLAY */}
-      <div className={`
+      <div
+        className={`
         fixed inset-0 top-[71px] bg-white z-40 transition-transform duration-300 md:hidden
         ${isOpen ? "translate-x-0" : "translate-x-full"}
-      `}>
+      `}
+      >
         <nav className="flex flex-col p-6 gap-6">
-          <Link href="/SobreNos" onClick={closeMenu} className="text-lg font-medium border-b border-gray-100 pb-4">
+          <Link
+            href="/SobreNos"
+            onClick={closeMenu}
+            className="text-lg font-medium border-b border-gray-100 pb-4"
+          >
             Sobre Nós
           </Link>
-          <Link href="/trabalhos" onClick={closeMenu} className="text-lg font-medium border-b border-gray-100 pb-4">
+          <Link
+            href="/trabalhos"
+            onClick={closeMenu}
+            className="text-lg font-medium border-b border-gray-100 pb-4"
+          >
             Trabalhos
           </Link>
-          <Link href="/contato" onClick={closeMenu} className="text-lg font-medium border-b border-gray-100 pb-4">
+          <Link
+            href="/contato"
+            onClick={closeMenu}
+            className="text-lg font-medium border-b border-gray-100 pb-4"
+          >
             Contato
           </Link>
 
@@ -152,9 +168,12 @@ export default function Header() {
 
           {/* Redes Sociais no Mobile */}
           <div className="flex justify-center gap-8 pt-6">
-             <FaInstagram className="w-6 h-6 text-gray-400" href="https://www.instagram.com/ginogran.marmores/" />
-             <FaFacebookF className="w-6 h-6 text-gray-400" />
-             <FaYoutube className="w-6 h-6 text-gray-400" />
+            <FaInstagram
+              className="w-6 h-6 text-gray-400"
+              href="https://www.instagram.com/ginogran.marmores/"
+            />
+            <FaFacebookF className="w-6 h-6 text-gray-400" />
+            <FaYoutube className="w-6 h-6 text-gray-400" />
           </div>
         </nav>
       </div>

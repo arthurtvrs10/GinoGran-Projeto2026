@@ -8,12 +8,12 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
       },
       {
-        protocol: 'https',
-        hostname: '**.supabase.co', // Permite imagens do Supabase
+        protocol: "https",
+        hostname: "**.supabase.co", // Permite imagens do Supabase
       },
       {
-        protocol: 'https',
-        hostname: 'placehold.co', // Permite imagens de placeholder
+        protocol: "https",
+        hostname: "placehold.co", // Permite imagens de placeholder
       },
     ],
   },

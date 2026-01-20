@@ -3,7 +3,6 @@
 export const CatalogSkeleton = () => (
   <section className="w-full pt-0 pb-10 md:pb-20 bg-white dark:bg-transparent overflow-hidden">
     <div className="max-w-full mx-auto px-4 md:px-22">
-      
       {/* --- CABEÇALHO --- */}
       <div className="flex flex-row justify-between items-end border-t border-gray-100/50 pb-8 pt-6">
         <div className="space-y-2">
@@ -12,19 +11,21 @@ export const CatalogSkeleton = () => (
           {/* "Destaques" */}
           <div className="h-8 w-48 bg-gray-200 dark:bg-zinc-800 animate-pulse rounded-lg" />
         </div>
-        
+
         {/* Link "Ver catálogo" (apenas desktop) */}
         <div className="hidden md:block h-4 w-40 bg-gray-200 dark:bg-zinc-800 animate-pulse rounded-md" />
       </div>
 
       {/* --- CARDS HÍBRIDOS (Scroll Mobile / Grid Desktop) --- */}
-      <div className="
+      <div
+        className="
         flex gap-4 overflow-hidden pb-6 -mx-4 px-4
         md:grid md:grid-cols-4 md:gap-6 md:pb-0 md:mx-0 md:px-0
-      ">
+      "
+      >
         {[...Array(4)].map((_, i) => (
-          <div 
-            key={i} 
+          <div
+            key={i}
             className="
               min-w-[85%] sm:min-w-[45%] md:min-w-0 
               flex flex-col gap-3
@@ -32,7 +33,7 @@ export const CatalogSkeleton = () => (
           >
             {/* Imagem do Produto (Aspect Ratio) */}
             <div className="w-full aspect-[4/4] bg-gray-200 dark:bg-zinc-800 animate-pulse rounded-xl" />
-            
+
             {/* Infos do Produto */}
             <div className="space-y-2 mt-1">
               <div className="h-4 w-3/4 bg-gray-200 dark:bg-zinc-800 animate-pulse rounded-full" />
@@ -42,7 +43,6 @@ export const CatalogSkeleton = () => (
           </div>
         ))}
       </div>
-
     </div>
   </section>
 );
@@ -50,13 +50,15 @@ export const CatalogSkeleton = () => (
 export const TrabalhosSkeleton = () => {
   return (
     // Container ajustado para Grid Uniforme (não mais Masonry) e Scroll Mobile
-    <div className="
+    <div
+      className="
       flex gap-4 overflow-hidden pb-6 -mx-4 px-4
       md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 md:pb-0 md:mx-0 md:px-0
-    ">
+    "
+    >
       {[...Array(3)].map((_, i) => (
-        <div 
-          key={i} 
+        <div
+          key={i}
           className="
             min-w-[85%] sm:min-w-[45%] md:min-w-0
             relative rounded-2xl overflow-hidden
@@ -72,13 +74,15 @@ export const TrabalhosSkeleton = () => {
 
 export const BlogSkeleton = () => (
   // Container ajustado com padding lateral específico do Blog (-mx-5 px-5)
-  <div className="
+  <div
+    className="
     flex gap-4 overflow-hidden pb-6 -mx-5 px-5
     md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 md:pb-0 md:mx-0 md:px-0
-  ">
+  "
+  >
     {[...Array(4)].map((_, i) => (
-      <div 
-        key={i} 
+      <div
+        key={i}
         className="
           min-w-[85%] sm:min-w-[45%] md:min-w-0
           space-y-4
