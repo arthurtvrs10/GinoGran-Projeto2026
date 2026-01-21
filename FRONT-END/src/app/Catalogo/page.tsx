@@ -7,8 +7,7 @@ import { SidebarFilter } from "@/Components/Catalogo/SidebarFilter";
 import { LuSlidersHorizontal } from "react-icons/lu";
 import { IoMdClose } from "react-icons/io";
 import Cta from "@/Components/pages/CTA";
-import { ProductModal } from "@/Components/ui/ProductModal";
-import { CatalogSkeleton } from "@/Components/Skeletons/HomeSkeletons"; // Importar Skeleton
+// Removemos a importação do ProductModal
 
 export default function CatalogPage() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -20,17 +19,14 @@ export default function CatalogPage() {
   const [selectedFinish, setSelectedFinish] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("");
 
-  // Estados do Modal
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(null);
+  // Removemos os estados do Modal (isModalOpen, selectedProduct)
 
-  // --- LÓGICA DE BUSCA OTIMIZADA (Filtra no Supabase) ---
+  // --- LÓGICA DE BUSCA OTIMIZADA ---
   const fetchProducts = useCallback(async () => {
     setIsLoading(true);
     try {
       let query = supabase.from("produtos").select("*");
 
-      // Aplica filtros dinamicamente se houver seleção
       if (selectedMaterials.length > 0) {
         query = query.in("category", selectedMaterials);
       }
@@ -52,12 +48,11 @@ export default function CatalogPage() {
     }
   }, [selectedMaterials, selectedFinish, selectedColor]);
 
-  // Chama a busca sempre que um filtro mudar
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
 
-  // --- HANDLERS ---
+  // --- HANDLERS DE FILTRO ---
   const toggleMaterial = (material: string) => {
     setSelectedMaterials((prev) =>
       prev.includes(material) ? prev.filter((item) => item !== material) : [...prev, material]
@@ -72,15 +67,7 @@ export default function CatalogPage() {
     setSelectedColor("");
   };
 
-  const handleOpenModal = (product: ProductType) => {
-    setSelectedProduct(product);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setTimeout(() => setSelectedProduct(null), 300);
-  };
+  // Removemos handleOpenModal e handleCloseModal
 
   return (
     <div>
@@ -150,7 +137,6 @@ export default function CatalogPage() {
           </header>
 
           {isLoading ? (
-             // Uso dos Skeletons que você já criou
              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {[...Array(8)].map((_, i) => (
                   <div key={i} className="h-64 bg-gray-200 animate-pulse rounded-md" /> 
@@ -162,7 +148,7 @@ export default function CatalogPage() {
                 <ProductCard
                   key={product.id}
                   data={product}
-                  onClick={() => handleOpenModal(product)}
+                  // Removemos a prop onClick={...}
                 />
               ))}
             </div>
@@ -178,7 +164,7 @@ export default function CatalogPage() {
       </main>
 
       <Cta />
-      <ProductModal isOpen={isModalOpen} onClose={handleCloseModal} product={selectedProduct} />
+      {/* Componente <ProductModal /> removido do final */}
     </div>
   );
 }

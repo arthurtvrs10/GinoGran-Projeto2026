@@ -1,6 +1,6 @@
 import Image from "next/image";
+import Link from "next/link"; // Importamos o Link do Next.js
 
-// 1. CRIAMOS E EXPORTAMOS O TIPO DO PRODUTO AQUI
 export interface ProductType {
   id: number;
   title: string;
@@ -11,19 +11,16 @@ export interface ProductType {
   description?: string;
 }
 
-// 2. Usamos esse tipo dentro das Props do Card
 interface ProductProps {
   data: ProductType;
-  onClick?: () => void;
+  // Removemos a prop 'onClick' pois agora é um Link
 }
 
-export function ProductCard({ data, onClick }: ProductProps) {
+export function ProductCard({ data }: ProductProps) {
   return (
-    <div
-      onClick={onClick}
-      role="button"
-      tabIndex={0}
-      className={`group relative flex flex-col bg-white rounded-md border border-stone-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden h-full ${onClick ? "cursor-pointer" : ""}`}
+    <Link
+      href={`/produto/${data.id}`} // Link direto para a nova página dinâmica
+      className="group relative flex flex-col bg-white rounded-md border border-stone-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden h-full cursor-pointer"
     >
       {/* Imagem */}
       <div className="relative w-full aspect-3/2 overflow-hidden bg-stone-100">
@@ -64,6 +61,6 @@ export function ProductCard({ data, onClick }: ProductProps) {
           </svg>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
