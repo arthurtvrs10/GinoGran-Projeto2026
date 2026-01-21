@@ -31,8 +31,8 @@ export function FeaturedCatalog() {
   }, []);
 
   return (
-    <section className="py-16 md:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+    <section className="py-16 md:py-24 bg-white overflow-hidden">
+      <div className="max-w-full mx-auto px-4 md:px-22">
         {/* Cabeçalho da Seção */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
           <div>
@@ -53,23 +53,28 @@ export function FeaturedCatalog() {
           </Link>
         </div>
 
-        {/* Grid de Produtos */}
+        {/* Grid de Produtos (Híbrido: Scroll no Mobile / Grid no Desktop) */}
         {isLoading ? (
           <CatalogSkeleton />
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="
+            flex gap-4 overflow-x-auto pb-6 -mx-4 px-4 snap-x
+            md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-6 md:pb-0 md:mx-0 md:px-0 md:overflow-visible
+          ">
             {products.map((product) => (
-              <ProductCard 
+              // Wrapper div para definir a largura no scroll horizontal (85% da tela)
+              <div 
                 key={product.id} 
-                data={product} 
-                // Removemos o onClick aqui também
-              />
+                className="min-w-[85%] sm:min-w-[45%] md:min-w-0 h-full snap-center"
+              >
+                <ProductCard data={product} />
+              </div>
             ))}
           </div>
         )}
 
         {/* Botão Mobile (Só aparece no celular) */}
-        <div className="mt-8 md:hidden text-center">
+        <div className="mt-4 md:hidden text-center">
           <Link 
             href="/Catalogo"
             className="inline-block bg-stone-900 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-orange-600 transition-all"
@@ -78,8 +83,6 @@ export function FeaturedCatalog() {
           </Link>
         </div>
       </div>
-      
-      {/* Removemos o <ProductModal /> que ficava aqui */}
     </section>
   );
 }

@@ -1,7 +1,7 @@
 // src/Components/Skeletons/HomeSkeletons.tsx
 
 export const CatalogSkeleton = () => (
-  <section className="w-full pt-0 pb-10 md:pb-20 bg-white dark:bg-transparent overflow-hidden">
+  <section className="w-full pt-0 pb-10 md:pb-22 bg-white dark:bg-transparent overflow-hidden">
     <div className="max-w-full mx-auto px-4 md:px-22">
       {/* --- CABEÇALHO --- */}
       <div className="flex flex-row justify-between items-end border-t border-gray-100/50 pb-8 pt-6">

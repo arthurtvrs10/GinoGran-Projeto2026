@@ -2,13 +2,11 @@ import BlogSection from "@/Components/Home/BlogSection";
 import CtaSection from "@/Components/Home/CtaSection";
 import { FeaturedCatalog } from "@/Components/Home/FeatureCatalog";
 import FeaturedWorks from "@/Components/Home/FeatureTrabalhos";
-import FeaturesBar from "@/Components/Home/FeaturesBar";
 import InfiniteMarquee from "@/Components/Home/InfiniteMarquee";
 
 import Slider from "@/Components/Home/Slider";
 import StoneMatch from "@/Components/Home/StoneMatch";
 import TestimonialSection from "@/Components/ui/TestimonialSection";
-import { Suspense } from "react";
 
 // --- OPEN GRAPH ESPECÍFICO DA HOME ---
 export const metadata = {
