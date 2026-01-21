@@ -11,10 +11,7 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "**.supabase.co", // Permite imagens do Supabase
       },
-      {
-        protocol: "https",
-        hostname: "placehold.co", // Permite imagens de placeholder
-      },
+      
     ],
   },
 };

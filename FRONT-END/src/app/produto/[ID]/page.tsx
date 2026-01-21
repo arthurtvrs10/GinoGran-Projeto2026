@@ -131,6 +131,19 @@ export default async function ProductPage({ params }: Props) {
             <p className="text-center text-xs text-gray-400">
               Atendimento imediato via WhatsApp. Enviamos fotos da chapa real.
             </p>
+
+            {/* --- SUGESTÃO DE CÓDIGO PARA PEDRAS RELACIONADAS --- */}
+            <section className="mt-20 pt-10 border-t border-gray-100">
+              <h3 className="text-2xl font-serif font-bold text-gray-900 mb-6">
+                Outras opções de {product.category}
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {/* Aqui idealmente farias um fetch de 4 produtos da mesma categoria, excluindo o atual */}
+                <div className="bg-gray-50 p-4 rounded-xl text-center text-gray-500 text-sm">
+                  Em breve: Sugestões automáticas
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </div>

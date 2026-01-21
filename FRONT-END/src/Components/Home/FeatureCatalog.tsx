@@ -1,129 +1,85 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { ArrowRight, Plus } from "lucide-react"; // Usei Plus ou Arrow
-import { motion } from "framer-motion";
-
 import { supabase } from "@/lib/supabase";
 import { ProductCard, ProductType } from "@/Components/Catalogo/ProductCard";
-import { ProductModal } from "@/Components/ui/ProductModal";
 import { CatalogSkeleton } from "@/Components/Skeletons/HomeSkeletons";
+import Link from "next/link";
 
 export function FeaturedCatalog() {
   const [products, setProducts] = useState<ProductType[]>([]);
-  const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(
-    null,
-  );
   const [isLoading, setIsLoading] = useState(true);
 
+  // --- BUSCA APENAS 4 PRODUTOS PARA DESTAQUE ---
   useEffect(() => {
-    async function fetchFeaturedProducts() {
+    async function fetchFeatured() {
       try {
-        const { data } = await supabase.from("produtos").select("*").limit(4);
-        if (data) setProducts(data);
+        const { data } = await supabase
+          .from("produtos")
+          .select("*")
+          .limit(4); // Pega apenas os 4 primeiros
+        
+        setProducts(data || []);
       } catch (error) {
-        console.error("Erro:", error);
+        console.error("Erro ao buscar destaques:", error);
       } finally {
         setIsLoading(false);
       }
     }
-    fetchFeaturedProducts();
+
+    fetchFeatured();
   }, []);
 
-  const openModal = (product: ProductType) => setSelectedProduct(product);
-  const closeModal = () => setSelectedProduct(null);
-
-  if (isLoading) return <CatalogSkeleton />;
-
   return (
-    <>
-      <section className="w-full py-8 bg-white overflow-hidden">
-        <div className="max-w-full mx-auto px-4 md:px-22">
-          {/* --- CABEÇALHO ELEGANTE --- */}
-          <div className="flex flex-row justify-between items-end border-t border-gray-100/50 pt-0 md:pt-0 pb-8">
-            <div>
-              <span className="text-primary font-bold uppercase tracking-widest text-xs">
-                Nossa Coleção
-              </span>
-              <h2 className="text-2xl md:text-4xl font-bold text-darkgray mt-2">
-                Destaques
-              </h2>
-            </div>
-
-            {/* DESKTOP: Link sutil com seta (Sem fundo pesado) */}
-            <Link
-              href="/Catalogo"
-              className="hidden md:flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-primary transition-colors group"
-            >
-              Ver catálogo completo
-              <ArrowRight
-                size={18}
-                className="group-hover:translate-x-1 transition-transform"
-              />
-            </Link>
+    <section className="py-16 md:py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
+        {/* Cabeçalho da Seção */}
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+          <div>
+            <span className="text-orange-600 font-bold tracking-widest uppercase text-sm">
+              Nossa Coleção
+            </span>
+            <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900 mt-2">
+              Pedras em Destaque
+            </h2>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+          
+          <Link 
+            href="/Catalogo"
+            className="hidden md:flex items-center gap-2 text-stone-800 font-semibold hover:text-orange-600 transition-colors"
           >
-            {/* CARROSSEL MOBILE / GRID DESKTOP */}
-            <div
-              className="
-              flex gap-4 overflow-x-auto snap-x snap-mandatory pb-6 -mx-4 px-4 scrollbar-hide
-              md:grid md:grid-cols-4 md:gap-6 md:overflow-visible md:pb-0 md:mx-0 md:px-0
-            "
-            >
-              {products.map((product) => (
-                <motion.div
-                  key={product.id}
-                  className="min-w-[85%] sm:min-w-[45%] snap-center h-full md:min-w-0"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
-                  <ProductCard
-                    data={product}
-                    onClick={() => openModal(product)}
-                  />
-                </motion.div>
-              ))}
-
-              {/* CARD 'VER TODOS' (Apenas Mobile - Final do Scroll) */}
-              <div className="flex md:hidden min-w-[40%] snap-center items-center justify-center">
-                <Link
-                  href="/Catalogo"
-                  className="flex flex-col items-center gap-3 group"
-                >
-                  <div className="w-14 h-14 rounded-full bg-orange-10 border border-primary/20 flex items-center justify-center text-primary group-active:scale-95 transition-all shadow-sm">
-                    <ArrowRight size={24} />
-                  </div>
-                  <span className="font-bold text-sm text-darkgray">
-                    Ver Todos
-                  </span>
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* MOBILE BUTTON (Opcional - Se quiser um botão fixo abaixo ao invés do card) */}
-          <div className="mt-6 md:hidden flex justify-center">
-            <Link
-              href="/Catalogo"
-              className="w-full text-center py-3 rounded-lg border border-black-10 bg-white text-darkgray font-bold text-sm shadow-sm active:bg-gray-50"
-            >
-              Explorar Catálogo Completo
-            </Link>
-          </div>
+            Ver catálogo completo
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+          </Link>
         </div>
-      </section>
 
-      <ProductModal
-        isOpen={!!selectedProduct}
-        product={selectedProduct}
-        onClose={closeModal}
-      />
-    </>
+        {/* Grid de Produtos */}
+        {isLoading ? (
+          <CatalogSkeleton />
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {products.map((product) => (
+              <ProductCard 
+                key={product.id} 
+                data={product} 
+                // Removemos o onClick aqui também
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Botão Mobile (Só aparece no celular) */}
+        <div className="mt-8 md:hidden text-center">
+          <Link 
+            href="/Catalogo"
+            className="inline-block bg-stone-900 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-orange-600 transition-all"
+          >
+            Ver todo o catálogo
+          </Link>
+        </div>
+      </div>
+      
+      {/* Removemos o <ProductModal /> que ficava aqui */}
+    </section>
   );
 }

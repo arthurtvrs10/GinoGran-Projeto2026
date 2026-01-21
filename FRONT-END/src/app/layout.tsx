@@ -17,7 +17,7 @@ import WhatsAppButton from "@/Components/ui/WhatsAppButton";
 // --- CONFIGURAÇÃO OPEN GRAPH GLOBAL ---
 export const metadata = {
   // Use a URL real do seu site quando publicar (ex: https://ginogran.com.br)
-  metadataBase: new URL("http://localhost:3000"),
+  metadataBase: new URL("https://www.ginogran.com.br"), // <-- ADICIONA O TEU DOMÍNIO AQUI
   title: {
     default: "Ginogran - Mármores e Granitos",
     template: "%s | Ginogran", // O %s será substituído pelo título da página interna
