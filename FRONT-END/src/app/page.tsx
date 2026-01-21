@@ -6,6 +6,7 @@ import FeaturesBar from "@/Components/Home/FeaturesBar";
 import InfiniteMarquee from "@/Components/Home/InfiniteMarquee";
 
 import Slider from "@/Components/Home/Slider";
+import StoneMatch from "@/Components/Home/StoneMatch";
 import TestimonialSection from "@/Components/ui/TestimonialSection";
 import { Suspense } from "react";
 
@@ -28,6 +29,7 @@ export default function Home() {
       <CtaSection />
       <FeaturedWorks />
       <TestimonialSection />
+      <StoneMatch />
       <BlogSection />
     </main>
   );
