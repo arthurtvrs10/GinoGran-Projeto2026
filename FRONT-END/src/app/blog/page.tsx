@@ -50,12 +50,12 @@ export default function BlogListingPage() {
     return <div className="py-20 text-center">Carregando novidades...</div>;
 
   return (
-    <div className="w-full bg-white min-h-screen pb-20">
+    <div className="w-full bg-white min-h-screen">
       {/* --- 1. HERO SECTION (SEU DESIGN ORIGINAL) --- */}
       <section className="relative w-full h-[400px] flex items-center justify-center bg-gray-900 overflow-hidden">
         <div className="absolute inset-0 opacity-40">
           <Image
-            src="/marmore-blog-hero.jpg" // Certifique-se que essa imagem existe na pasta public
+            src="/Marmore1.jpeg" // Certifique-se que essa imagem existe na pasta public
             alt="Blog Ginogran"
             fill
             className="object-cover"
@@ -76,10 +76,10 @@ export default function BlogListingPage() {
         </div>
       </section>
 
-      <main className="max-w-7xl mx-auto px-4 md:px-8 py-16">
+      <main className="max-w-full mx-auto  pt-16">
         {/* --- 2. POST EM DESTAQUE (Lógica conectada ao Supabase) --- */}
         {featuredPost && (
-          <section className="mb-20">
+          <section className="mb-20 px-4 md:px-22">
             <h2 className="text-2xl font-bold text-gray-900 mb-8 border-l-4 border-[#F9A825] pl-4">
               Destaque da Semana
             </h2>
@@ -124,8 +124,8 @@ export default function BlogListingPage() {
         )}
 
         {/* --- 3. GRID DE POSTS RECENTES --- */}
-        <section>
-          <div className="flex items-center justify-between mb-10">
+        <section className="px-4 md:px-22">
+          <div className="flex items-center justify-between mb-10 ">
             <h2 className="text-2xl font-bold text-gray-900 border-l-4 border-[#F9A825] pl-4">
               Últimas Postagens
             </h2>

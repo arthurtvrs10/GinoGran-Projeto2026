@@ -98,7 +98,7 @@ export default function BlogSection() {
         {/* Cabeçalho */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-8 ">
           <div>
-            <span className="text-orange-600 font-bold uppercase tracking-wider text-xs">
+            <span className="text-orange-50 font-bold uppercase tracking-wider text-xs">
               Nossa Coleção
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
@@ -108,7 +108,7 @@ export default function BlogSection() {
 
           <Link
             href="/blog"
-            className="hidden md:flex group items-center gap-2 text-gray-600 font-bold hover:text-orange-600 transition-colors mt-4 md:mt-0"
+            className="hidden md:flex group items-center gap-2 text-gray-600 font-bold hover:text-orange-50 transition-colors mt-4 md:mt-0"
           >
             Ver blog completo
             <ArrowRight
@@ -142,7 +142,7 @@ export default function BlogSection() {
                 "
               >
                 <div className="relative h-48 overflow-hidden bg-gray-100">
-                  <div className="absolute top-4 left-4 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
+                  <div className="absolute top-4 left-4 bg-orange-50 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
                     {post.category}
                   </div>
                   <Image
@@ -165,7 +165,7 @@ export default function BlogSection() {
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors line-clamp-2">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-50 transition-colors line-clamp-2">
                     {post.title}
                   </h3>
                   <p className="text-gray-500 text-sm mb-4 line-clamp-3">
@@ -174,7 +174,7 @@ export default function BlogSection() {
 
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="inline-flex items-center gap-2 text-orange-600 font-bold text-sm hover:gap-3 transition-all"
+                    className="inline-flex items-center gap-2 text-orange-50 font-bold text-sm hover:gap-3 transition-all"
                   >
                     Ler artigo completo <ArrowRight size={16} />
                   </Link>
