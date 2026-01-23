@@ -1,87 +1,166 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
-import { ProductCard, ProductType } from "@/Components/Catalogo/ProductCard";
-import { CatalogSkeleton } from "@/Components/Skeletons/HomeSkeletons";
 import Link from "next/link";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"; // Importei as setas
+import { ProductCard, ProductType } from "@/Components/Catalogo/ProductCard";
+import { useRef, useState } from "react";
 
-export function FeaturedCatalog() {
-  const [products, setProducts] = useState<ProductType[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+interface FeatureCatalogProps {
+  title: string;
+  subtitle?: string;
+  products: ProductType[];
+  showViewAll?: boolean;
+}
 
-  // --- BUSCA APENAS 4 PRODUTOS PARA DESTAQUE ---
-  useEffect(() => {
-    async function fetchFeatured() {
-      try {
-        const { data } = await supabase
-          .from("produtos")
-          .select("*")
-          .limit(4); // Pega apenas os 4 primeiros
-        
-        setProducts(data || []);
-      } catch (error) {
-        console.error("Erro ao buscar destaques:", error);
-      } finally {
-        setIsLoading(false);
-      }
+export function FeatureCatalog({ 
+  title, 
+  subtitle, 
+  products, 
+  showViewAll = true 
+}: FeatureCatalogProps) {
+  
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const [isDown, setIsDown] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeftState, setScrollLeftState] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+
+  if (!products || products.length === 0) return null;
+
+  // --- Funções das Setas (Scroll por Clique) ---
+  const scrollLeft = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({ left: -320, behavior: "smooth" }); // Rola 1 card aprox
     }
+  };
 
-    fetchFeatured();
-  }, []);
+  const scrollRight = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({ left: 320, behavior: "smooth" });
+    }
+  };
+
+  // --- Lógica de Drag and Drop (Mouse Arrastar) ---
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!sliderRef.current) return;
+    setIsDown(true);
+    setIsDragging(false);
+    setStartX(e.pageX - sliderRef.current.offsetLeft);
+    setScrollLeftState(sliderRef.current.scrollLeft);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDown(false);
+    setIsDragging(false);
+  };
+
+  const handleMouseUp = () => {
+    setIsDown(false);
+    setTimeout(() => setIsDragging(false), 50); 
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDown || !sliderRef.current) return;
+    e.preventDefault();
+    setIsDragging(true);
+    const x = e.pageX - sliderRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    sliderRef.current.scrollLeft = scrollLeftState - walk;
+  };
 
   return (
-    <section className="py-16 md:py-24 bg-white overflow-hidden">
-      <div className="max-w-full mx-auto px-4 md:px-22">
-        {/* Cabeçalho da Seção */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
-          <div>
-            <span className="text-orange-600 font-bold tracking-widest uppercase text-sm">
-              Nossa Coleção
-            </span>
-            <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900 mt-2">
-              Pedras em Destaque
+    <section className="py-5 md:pt-5 bg-stone-50 border-t border-stone-100">
+      
+      {/* Container Principal */}
+      <div className="w-full max-w-full mx-auto px-4 md:px-22">
+        
+        {/* Cabeçalho */}
+        <div className="flex items-end justify-between mb-8 md:mb-12">
+          <div className="max-w-2xl">
+            {subtitle && (
+              <span className="block text-orange-600 font-bold uppercase tracking-widest text-xs mb-2">
+                {subtitle}
+              </span>
+            )}
+            <h2 className="text-3xl md:text-4xl font-serif text-stone-900 font-bold leading-tight">
+              {title}
             </h2>
           </div>
-          
-          <Link 
-            href="/Catalogo"
-            className="hidden md:flex items-center gap-2 text-stone-800 font-semibold hover:text-orange-600 transition-colors"
-          >
-            Ver catálogo completo
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-          </Link>
+
+          {showViewAll && (
+            <Link 
+              href="/Catalogo" 
+              className="hidden md:flex items-center gap-2 text-stone-500 hover:text-stone-900 transition-colors text-sm font-medium group"
+            >
+              Ver catálogo completo 
+              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+          )}
         </div>
 
-        {/* Grid de Produtos (Híbrido: Scroll no Mobile / Grid no Desktop) */}
-        {isLoading ? (
-          <CatalogSkeleton />
-        ) : (
-          <div className="
-            flex gap-4 overflow-x-auto pb-6 -mx-4 px-4 snap-x
-            md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-6 md:pb-0 md:mx-0 md:px-0 md:overflow-visible
-          ">
+        {/* WRAPPER DO SLIDER + SETAS (Relative para posicionar as setas) */}
+        <div className="relative group">
+          
+          {/* --- SETA ESQUERDA (Só Desktop) --- */}
+          <button
+            onClick={scrollLeft}
+            className="hidden md:flex absolute top-1/2 -left-12 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow-lg hover:bg-stone-50 border border-stone-100 text-stone-800 transition-all hover:scale-110 active:scale-95"
+            aria-label="Rolar para esquerda"
+          >
+            <ChevronLeft size={24} />
+          </button>
+
+          {/* --- CARROSSEL --- */}
+          <div 
+            ref={sliderRef}
+            onMouseDown={handleMouseDown}
+            onMouseLeave={handleMouseLeave}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}
+            className={`
+              relative -mx-4 px-4 md:mx-0 md:px-0 
+              overflow-x-auto pb-2 hide-scrollbar 
+              flex gap-4 md:gap-6 
+              cursor-grab active:cursor-grabbing select-none
+            `}
+            style={{ scrollSnapType: isDown ? 'none' : 'x mandatory' }}
+          >
             {products.map((product) => (
-              // Wrapper div para definir a largura no scroll horizontal (85% da tela)
               <div 
                 key={product.id} 
-                className="min-w-[85%] sm:min-w-[45%] md:min-w-0 h-full snap-center"
+                className={`
+                  w-[280px] md:w-[320px] snap-center shrink-0
+                  ${isDragging ? 'pointer-events-none' : ''}
+                `}
               >
                 <ProductCard data={product} />
               </div>
             ))}
           </div>
-        )}
 
-        {/* Botão Mobile (Só aparece no celular) */}
-        <div className="mt-4 md:hidden text-center">
-          <Link 
-            href="/Catalogo"
-            className="inline-block bg-stone-900 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-orange-600 transition-all"
+          {/* --- SETA DIREITA (Só Desktop) --- */}
+          <button
+            onClick={scrollRight}
+            className="hidden md:flex absolute top-1/2 -right-12 -translate-y-1/2 z-10 bg-white p-3 rounded-full shadow-lg hover:bg-stone-50 border border-stone-100 text-stone-800 transition-all hover:scale-110 active:scale-95"
+            aria-label="Rolar para direita"
           >
-            Ver todo o catálogo
-          </Link>
+            <ChevronRight size={24} />
+          </button>
+
         </div>
+
+        {/* Link Mobile */}
+        {showViewAll && (
+          <div className="mt-4 md:hidden text-center">
+            <Link 
+              href="/Catalogo" 
+              className="inline-flex items-center gap-2 text-stone-800 font-bold border-b border-stone-800 pb-1"
+            >
+              Ver todos os mármores
+            </Link>
+          </div>
+        )}
+        
       </div>
     </section>
   );

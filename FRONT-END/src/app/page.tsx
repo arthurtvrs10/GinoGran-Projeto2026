@@ -1,34 +1,40 @@
+import { supabase } from "@/lib/supabase";
+import HeroSection from "@/Components/Home/Slider";
+import InfiniteMarquee from "@/Components/Home/InfiniteMarquee";
+import { FeatureCatalog } from "@/Components/Home/FeatureCatalog";
+import FeatureTrabalhos from "@/Components/Home/FeatureTrabalhos";
+import StoneMatch from "@/Components/Home/StoneMatch";
 import BlogSection from "@/Components/Home/BlogSection";
 import CtaSection from "@/Components/Home/CtaSection";
-import { FeaturedCatalog } from "@/Components/Home/FeatureCatalog";
-import FeaturedWorks from "@/Components/Home/FeatureTrabalhos";
-import InfiniteMarquee from "@/Components/Home/InfiniteMarquee";
 
-import Slider from "@/Components/Home/Slider";
-import StoneMatch from "@/Components/Home/StoneMatch";
-import TestimonialSection from "@/Components/ui/TestimonialSection";
+// Função para buscar produtos destaque
+async function getFeaturedProducts() {
+  const { data } = await supabase
+    .from("produtos")
+    .select("*")
+    .limit(6); // Pega 6 produtos para o carrossel
+  return data || [];
+}
 
-// --- OPEN GRAPH ESPECÍFICO DA HOME ---
-export const metadata = {
-  title: "Início", // Vai ficar: Início | Ginogran
-  description:
-    "Descubra a elegância das pedras naturais. Mármores e Granitos selecionados para o seu projeto.",
-  openGraph: {
-    title: "Ginogran - Excelência em Pedras Naturais",
-  },
-};
+export default async function Home() {
+  const featuredProducts = await getFeaturedProducts();
 
-export default function Home() {
   return (
-    <main className="w-full">
-      <Slider />
+    <main>
+      <HeroSection />
       <InfiniteMarquee />
-      <FeaturedCatalog />
-      <CtaSection />
-      <FeaturedWorks />
-      <TestimonialSection />
+      
+      {/* Carrossel Reutilizável com Título da Home */}
+      <FeatureCatalog 
+        title="Destaques da Coleção" 
+        subtitle="O melhor da natureza" 
+        products={featuredProducts} 
+      />
+      
+      <FeatureTrabalhos />
       <StoneMatch />
       <BlogSection />
+      <CtaSection />
     </main>
   );
 }
