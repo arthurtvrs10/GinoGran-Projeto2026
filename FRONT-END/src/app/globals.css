@@ -46,9 +46,6 @@
   --color-orange-20: var(--Orange20);
   --color-orange-30: var(--Orange30-Hover);
   --color-orange-40: var(--Orange40);
-  --color-primary: var(
-    --Orange50-Primary
-  ); /* Dei o nome de 'primary' para facilitar */
   --color-orange-50: var(--Orange50-Primary); /* Ou mantenha a numeração */
   --color-orange-60: var(--Orange60);
   --color-orange-70: var(--Orange70);
