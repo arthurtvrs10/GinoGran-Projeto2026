@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/Components/pages/Header";
 import Footer from "@/Components/pages/Footer";
 import WhatsAppButton from "@/Components/ui/WhatsAppButton";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -52,6 +53,7 @@ export default function RootLayout({
         {children}
         <WhatsAppButton phoneNumber="5561985921488" />
         <Footer />
+        <GoogleAnalytics gaId="G-XXXXXXX" /> {/* Substitua pelo seu ID */}
       </body>
     </html>
   );

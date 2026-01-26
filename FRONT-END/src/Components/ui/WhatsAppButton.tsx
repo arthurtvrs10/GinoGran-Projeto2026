@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { MessageCircle, X } from "lucide-react";
+import { sendGAEvent } from "@next/third-parties/google"; // Importa a função de rastreio
 
 interface WhatsAppButtonProps {
   phoneNumber: string;
@@ -27,6 +28,15 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
 
     return () => clearInterval(interval);
   }, []);
+
+  // Função para disparar o evento de conversão antes de abrir o link
+  const handleWhatsAppClick = () => {
+    sendGAEvent({ 
+      event: 'conversion', 
+      value: 'whatsapp_contact_click',
+      label: 'Botão Flutuante Principal' 
+    });
+  };
 
   const isDark = variant === "dark";
 
@@ -68,6 +78,7 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
         href={`https://wa.me/${phoneNumber}`}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={handleWhatsAppClick} // Aciona o rastreio no clique
         className="group relative"
       >
         <div
