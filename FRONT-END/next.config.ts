@@ -16,6 +16,12 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "**.supabase.co", // Permite imagens do Supabase
       },
+      {
+        protocol: 'https',
+        hostname: 'gxqcjmjfipmxvdmflabu.supabase.co',
+        port: '',
+        pathname: '/storage/v1/object/public/**',
+      },
       
     ],
   },
