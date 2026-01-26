@@ -53,7 +53,7 @@ export default function RootLayout({
         {children}
         <WhatsAppButton phoneNumber="5561985921488" />
         <Footer />
-        <GoogleAnalytics gaId="G-XXXXXXX" /> {/* Substitua pelo seu ID */}
+        <GoogleAnalytics gaId="G-E25CH7JNNE" /> {/* Substitua pelo seu ID */}
       </body>
     </html>
   );
