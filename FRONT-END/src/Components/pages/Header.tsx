@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { FaInstagram } from "react-icons/fa6/FaInstagram";
-import { FaFacebookF } from "react-icons/fa6/FaFacebook";
-import { FaPinterest } from "react-icons/fa6/FaPinterest";
-import { FaYoutube } from "react-icons/fa6/FaYoutube";
+import { 
+  FaInstagram, 
+  FaFacebookF, 
+  FaPinterest, 
+  FaYoutube 
+} from "react-icons/fa6";
 
 import { HiMenu, HiX } from "react-icons/hi"; // Ícones para o menu
 import { FaArrowRight } from "react-icons/fa";
