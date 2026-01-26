@@ -133,6 +133,8 @@ export default function BlogSection() {
             <Image
               src={post.image}
               alt={post.title}
+              quality={60}
+              sizes="(max-width: 768px) 100vw, 33vw" // Informe ao browser que o card é pequeno
               fill
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />

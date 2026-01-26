@@ -3,7 +3,9 @@ import "./globals.css";
 import Header from "@/Components/pages/Header";
 import Footer from "@/Components/pages/Footer";
 import WhatsAppButton from "@/Components/ui/WhatsAppButton";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script"; 
+
+
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -17,6 +19,11 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 
 // --- CONFIGURAÇÃO OPEN GRAPH GLOBAL ---
 export const metadata = {
+  other: {
+    rel: "preconnect",
+    url: "https://gxqcjmjfipmxvdmflabu.supabase.co",
+  },
+
   // Use a URL real do seu site quando publicar (ex: https://ginogran.com.br)
   metadataBase: new URL("https://www.ginogran.com.br"), // <-- ADICIONA O TEU DOMÍNIO AQUI
   title: {
@@ -59,7 +66,21 @@ export default function RootLayout({
         {children}
         <WhatsAppButton phoneNumber="5561985921488" />
         <Footer />
-        <GoogleAnalytics gaId="G-E25CH7JNNE" /> {/* Substitua pelo seu ID */}
+        
+
+        {/* Carregamento do Google Analytics com estratégia lazyOnload para não travar o site */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-E25CH7JNNE"
+          strategy="lazyOnload"
+        />
+        <Script id="google-analytics" strategy="lazyOnload">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-E25CH7JNNE');
+          `}
+        </Script>
       </body>
     </html>
   );
