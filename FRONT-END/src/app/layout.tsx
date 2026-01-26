@@ -23,6 +23,12 @@ export const metadata = {
     default: "Ginogran - Mármores e Granitos",
     template: "%s | Ginogran", // O %s será substituído pelo título da página interna
   },
+
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
+
   description:
     "Especialistas em mármores, granitos e pedras naturais de alto padrão. Transformamos pedras em obras de arte.",
   openGraph: {

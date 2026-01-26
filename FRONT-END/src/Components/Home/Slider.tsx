@@ -114,12 +114,14 @@ export default function Slider() {
     <div className="slider relative w-full h-[300px] md:h-auto md:aspect-[1512/400] m-auto overflow-hidden shadow-xl group bg-black">
       <button
         onClick={prevSlide}
+        aria-label="Slide anterior" // Adicione isto
         className="absolute z-20 top-1/2 left-4 -translate-y-1/2 bg-black/30 text-white p-3 rounded-full hover:bg-black/70 transition-colors opacity-0 group-hover:opacity-100 duration-300"
       >
         <ChevronLeft size={24} />
       </button>
       <button
         onClick={nextSlide}
+        aria-label="Próximo slide"
         className="absolute z-20 top-1/2 right-4 -translate-y-1/2 bg-black/30 text-white p-3 rounded-full hover:bg-black/70 transition-colors opacity-0 group-hover:opacity-100 duration-300"
       >
         <ChevronRight size={24} />
@@ -133,6 +135,7 @@ export default function Slider() {
             alt="Mobile"
             fill
             priority={current === 0}
+            fetchPriority={current === 0 ? "high" : "low"}
             className="object-cover"
             sizes="100vw"
           />
