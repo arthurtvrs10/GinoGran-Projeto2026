@@ -1,4 +1,4 @@
-"use client";
+/*"use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react"; 
@@ -127,11 +127,11 @@ export default function StoneMatch() {
         </div>
       </div>
       
-      {/* Background Decorativo */}
+      {/* Background Decorativo }
       <div className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none">
           <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-orange-600 rounded-full blur-[150px] mix-blend-screen" />
           <div className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] bg-stone-700 rounded-full blur-[150px]" />
       </div>
     </section>
   );
-}
+}*/

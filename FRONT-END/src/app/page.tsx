@@ -3,7 +3,6 @@ import HeroSection from "@/Components/Home/Slider";
 import InfiniteMarquee from "@/Components/Home/InfiniteMarquee";
 import { FeatureCatalog } from "@/Components/Home/FeatureCatalog";
 import FeatureTrabalhos from "@/Components/Home/FeatureTrabalhos";
-import StoneMatch from "@/Components/Home/StoneMatch";
 import BlogSection from "@/Components/Home/BlogSection";
 import CtaSection from "@/Components/Home/CtaSection";
 
@@ -32,7 +31,6 @@ export default async function Home() {
       />
       
       <FeatureTrabalhos />
-      <StoneMatch />
       <BlogSection />
       <CtaSection />
     </main>
